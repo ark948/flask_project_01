@@ -23,3 +23,6 @@ IMPORTANT STEP
 9. Restructured the project. brought content of source outside and removed source.
 
 10. Changed main language to Farsi.
+11. Added bootstrap to base.
+12. Need to add navigation bar to base. (Navigation bar or <nav> tag goes inside body. The first tag of body.)
+13. Deleted Header block from base.
