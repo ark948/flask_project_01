@@ -1,0 +1,22 @@
+1. Create project folder structure, create virtual environment, create empty git repository. Add .gitignore file immediately.
+
+IMPORTANT: Explicitly add .gitignore file to git by using: git add .gitignore
+
+2. gitignore summary:
+    include:
+    source folder
+    notes folder
+
+    exclude:
+    venv folder
+    .idea folder
+
+3. Create the config file. The application factory. Test route.
+4. Install flask using: pip install flask. Add requirements.txt: pip freeze > requirements.txt
+5. Instantiate flask app from application factory in run.py. and run the server to check. If successful, commit.
+6. Test if config file was accurately imported by printing adding a random value to config and print in application factory.
+
+IMPORTANT STEP
+7. Add the first test. (using pytest for now...) works fine.
+
+8. Add main blueprint

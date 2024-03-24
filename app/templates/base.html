@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="fa">
+<head>
+    <meta charset="UTF-8">
+    <title>
+        {% block title %}
+        {% if title %}
+            {{ title }} - MyKala
+        {% else %}
+            FlaskShop
+        {% endif %}
+        {% endblock %}</title>
+</head>
+<body>
+
+{% block header %}
+{% endblock %}
+
+{% block content %}
+{% endblock %}
+
+</body>
+</html>
