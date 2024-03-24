@@ -1,6 +1,6 @@
 import pytest
-from source.app import create_app
-from source.config import Config
+from app import create_app
+from config import Config
 
 @pytest.fixture()
 def app():

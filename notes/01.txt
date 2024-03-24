@@ -20,3 +20,6 @@ IMPORTANT STEP
 7. Add the first test. (using pytest for now...) works fine.
 
 8. Add main blueprint
+9. Restructured the project. brought content of source outside and removed source.
+
+10. Changed main language to Farsi.
