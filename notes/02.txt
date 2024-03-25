@@ -10,3 +10,11 @@ venv> pip install flask-sqlalchemy flask-migrate psycopg2
 6. Add sqlalchemy_database_uri to config
 7. Initialize db of flask-sqlalchemy and migrate object of flask-migrate in init file.
 8. Create a model
+9. Run database initialization venv> flask db init
+10. 'migrations' folder must now appear next to app folder.
+11. Import models in env.py file of the migration folder.
+12. Run flask db migrate -m "message" and flask db upgrade.
+
+13. Time to add auth blueprint. Add auth folder, init file, routes file.
+14. Do not forget to add url_prefix when registering auth blueprint in main init file.
+15. Next step will be adding flask-login and flask-form. Forgot to commit.

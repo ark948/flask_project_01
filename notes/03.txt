@@ -1,0 +1,2 @@
+1. Installing flask-wtf: venv> pip install flask-wtf
+2. Add forms.py module to auth

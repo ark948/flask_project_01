@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<p><h3 style="padding-right: 50px;">ناحیه کاربری</h3></p>
+
+<p><h4 style="padding-right: 50px;"><a href="{{ url_for('auth.register') }}">ثبت نام</a></h4></p>
+
+<p><h4 style="padding-right: 50px;"><a href="{{ url_for('auth.login') }}">ورود</a></h4></p>
+
+{% endblock %}
