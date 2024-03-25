@@ -1,0 +1,12 @@
+1. flask-sqlalchemy and flask-migrate packages must be installed.
+venv> pip install flask-sqlalchemy flask-migrate psycopg2
+
+2. Need to initialize flask-sqlalchemy for postgresql
+3. Logged in to postgresql shell (psql) cmd> psql -U postgres, enter password...
+4. Created a new database called shop, cmd> create database shop; \l to list the databases
+
+5. Now we need to connect to this database in flask. Also added 'basedir' var to config file. seems useful.
+
+6. Add sqlalchemy_database_uri to config
+7. Initialize db of flask-sqlalchemy and migrate object of flask-migrate in init file.
+8. Create a model

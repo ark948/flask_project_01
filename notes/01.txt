@@ -26,3 +26,7 @@ IMPORTANT STEP
 11. Added bootstrap to base.
 12. Need to add navigation bar to base. (Navigation bar or <nav> tag goes inside body. The first tag of body.)
 13. Deleted Header block from base.
+14. Added navigation to base.
+
+15. Initialize Database and Database migration using flask-sqlalchemy and flask-migrate.
+Continue on next note file
