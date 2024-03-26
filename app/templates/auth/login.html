@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+
+<h3>برای ورود به سایت از فرم زیر استفاده کنید.</h3>
+
+{% from "macros/_formhelpers.html" import render_field %}
+<form method="post">
+        {{ form.csrf_token }}
+        {{ render_field(form.username) }}
+        {{ render_field(form.password) }}
+        {{ render_field(form.remember_me) }}
+        {{ captcha_html(captcha)|safe }}
+        {{ render_field(form.submit) }}
+</form>
+
+<p style="padding-top: 50px;"><a href="{{ url_for('auth.login') }}">بارگذاری مجدد</a></p>
+
+{% endblock %}

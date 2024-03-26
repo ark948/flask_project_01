@@ -11,3 +11,9 @@ Do not forget csrf_token, otherwise not even errors will be displayed, which mak
 9. Render it in html form above submit button. commit changes.
 
 10. Time for flask-login extension.
+11. Initialize LoginManager from flask-login
+12. Add UserMixin to user model inheritance
+13. Add user loader function to the end of the user.py model file
+
+14. Write views for registration, login, logout and two forms for registration and login
+15. Testing
