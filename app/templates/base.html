@@ -50,6 +50,13 @@
       </div>
     </div>
   </nav>
+<header>
+{% block header %}
+  {% for message in get_flashed_messages() %}
+    {{ message }}
+  {% endfor %}
+{% endblock %}
+</header>
 {% block content %}
 {% endblock %}
 <script src="/static/bootstrap/js/bootstrap.min.js"></script>

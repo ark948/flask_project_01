@@ -1,2 +1,13 @@
 1. Installing flask-wtf: venv> pip install flask-wtf
 2. Add forms.py module to auth
+3. Create register form
+4. Add register form to register view and render it in template.
+Do not forget csrf_token, otherwise not even errors will be displayed, which makes debugging basically impossible.
+
+5. Add captcha using flask-simple-captcha.
+6. first instantiate CAPTCHA from flask_simple_captcha
+7. Add configs to it (config must be dict not class)
+8. Import Captcha in auth routes, do the captcha processesing, and pass it to html form.
+9. Render it in html form above submit button. commit changes.
+
+10. Time for flask-login extension.

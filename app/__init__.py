@@ -1,12 +1,14 @@
 from flask import Flask
-# import configuration file
 from config import Config
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
+from flask_simple_captcha import CAPTCHA
+from config import CaptchaConfig
 
 
 db = SQLAlchemy()
 migrate = Migrate()
+Captcha = CAPTCHA(config=CaptchaConfig)
 
 def create_app(config_class=Config):
     app = Flask(__name__)
@@ -14,6 +16,7 @@ def create_app(config_class=Config):
 
     db.init_app(app)
     migrate.init_app(app, db)
+    Captcha.init_app(app)
 
     # test route removed by adding main blueprint
     from app.main import bp as main_bp
