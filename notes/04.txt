@@ -1,0 +1,13 @@
+1. Change of plans. Out of flask's official docs, Flask cookbook, and miguel's tutorial, cookbook and miguel have chosen unittest for testing. (My mistake, they can be used together.)
+2. Let's switch to from pytest to unittest.
+3. Entire concept of testing requires more research.
+UNKNOWN ERROR
+4. Came back to test registration again, apparently database changes are not commited. THE ENTIRE USER TABLE DOES NOT EXIST!
+Need to find out what is causing the problem, Database connection seemds fine. alembic_version table exists, but no user table.
+5. There is something wrong with migration. Somehow the only migration that exists is the head.
+According to my notes, i did ran migration and upgrade command.
+Let's try to run the migration and upgrade again, see if changes remain.
+Maybe the problem was caused because i repeatedly opened pgadmin4 to check if my changes took effect, with the same user.
+Tested again. Works fine. Now need to make sure database changes have takne effect. But how?
+Let's check if revision file was pushed into repository. Only the base revision exists.
+Let's commit one now.

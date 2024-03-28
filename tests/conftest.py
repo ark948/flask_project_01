@@ -1,10 +1,10 @@
 import pytest
 from app import create_app
-from config import Config
+from config import TestConfig
 
 @pytest.fixture()
 def app():
-    app = create_app(Config)
+    app = create_app(TestConfig)
     app.config.update({
         "TESTING": True,
     })

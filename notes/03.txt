@@ -16,4 +16,4 @@ Do not forget csrf_token, otherwise not even errors will be displayed, which mak
 13. Add user loader function to the end of the user.py model file
 
 14. Write views for registration, login, logout and two forms for registration and login
-15. Testing
+15. Add shell context and do some testing.
