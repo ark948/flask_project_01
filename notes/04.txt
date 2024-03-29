@@ -43,3 +43,6 @@ Back to venv> ran migraiton again. flask db migrate -m "base-user"
 (NOTE: since migraiton folder still existed, i did not ran flask db init, just flask db migrate)
 new migraiton file must now appear
 venv> flask db upgrade
+Problem is fixed.
+Back to tests.
+IMPORTANT: Problem came back again.

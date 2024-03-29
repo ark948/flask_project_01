@@ -1,0 +1,8 @@
+Database problem still exists.
+It came back for some reason.
+I will drop all databases i created, and will follow digitalocean postgresql and flask tutorial to create a new user and database.
+
+Alright, seems ok. again. Honestly i have no idea what happened. Maybe because added 'psycopg2 to connection string.
+But still not sure.
+Anyway...about testing. I have came to conclusion that captcha are made for human eye and are made to be automated.
+So i have to disable them for testing. I'll try in config file.
