@@ -12,6 +12,8 @@ class TestWebApp(unittest.TestCase):
     def setUp(self):
         self.app = create_app()
         self.app.config['WTF_CSRF_ENABLED'] = False
+        self.app.config['DATABASE_URL'] = 'sqlite:///:memory' # this is my own
+        self.app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///:memory' # also my own
         self.appctx = self.app.app_context()
         self.appctx.push()
         db.create_all()
@@ -63,20 +65,24 @@ class TestWebApp(unittest.TestCase):
         # let's try BeautifulSoup
         
     # def test_captcha_element(self):
-    #     response = self.client.get('/auth/register')
-    #     assert response.status_code == 200
-    #     print("THIS SHOULD PRINT") # print statements normally won't print
-    #     # because pytest controls the standard output
-    #     # use '-s' with pytest command, may result in small difficulties
-    #     html = response.get_data()
-    #     soup = bs(html, 'html.parser')
-    #     print(response.status_code)
-    #     ic("ICECREAM") # test
-    #     captcha_hash = soup.find("input", {"name": "captcha-hash"})
-    #     ic(captcha_hash['value'])
-        
+        # response = self.client.get('/auth/register')
+        # assert response.status_code == 200
+        # print("THIS SHOULD PRINT") print statements normally won't print
+        # because pytest controls the standard output
+        # use '-s' with pytest command, may result in small difficulties
+        # html = response.get_data()
+        # soup = bs(html, 'html.parser')
+        # captcha_hash = soup.find("input", {"name": "captcha-hash"})
+        # ic(captcha_hash['value'])
+        # captcha_text = soup.find("input", {"name": "captcha-text"})
+
     def test_register_user(self):
+        result = self.captcha.create()
+        text = result['text']
+        c_hash = result['hash']
         response = self.client.post('/auth/register', data={
+            'captcha-hash': c_hash,
+            'captcha-text': text,
             'username': 'alice',
             'email': 'alice@example.com',
             'password': 'foo',
@@ -84,10 +90,5 @@ class TestWebApp(unittest.TestCase):
         }, follow_redirects=True)
         assert response.status_code == 200
         assert response.request.path == '/auth/login' # redirected to login
-
-        # login with new user
-        response = self.client.post('/auth/login', data={
-            'username': 'alice',
-            'password': 'foo',
-        }, follow_redirects=True)
-        assert response.status_code == 200
+        
+        print("\nLAST LINE")

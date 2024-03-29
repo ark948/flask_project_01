@@ -11,3 +11,35 @@ Maybe the problem was caused because i repeatedly opened pgadmin4 to check if my
 Tested again. Works fine. Now need to make sure database changes have takne effect. But how?
 Let's check if revision file was pushed into repository. Only the base revision exists.
 Let's commit one now.
+Added all files to git again.
+Heading back to tests...
+UPDATE: After some google searches, found out that what is was trying to do was 'automated ui testing' and the better approach is to just disable captcha.
+DATABASE PROBLEM STILL EXISTS, leave testing for now, this is higher priority.
+
+So the migraiton scripts exist, but database schema still only has alembic_version table.
+Most tutorials use plural in __tablename__ (i changed it to users)
+Trying to narrow down the cause of the problem. Using pgadmin i modified a database that i had created while ago.
+Tyring to see if changes will remain after restart. The test database was ok and changes where intact.
+Which means that postgresql installation is fine, there is soemthing wrong with this project, perhaps flask migrate.
+The env.py file also seems ok. Checked it against previous project.
+Since migration scripts exist, i think the problem may be in the connection between flask-migrate and postgresql.
+
+OK, two problems were found. first, the model was not properly imported in env.py.
+second, the connection string was missing a colon, the first one.
+Going to delete all migraiton files, drop the alembic_version table from database using psql shell, And making the initial migration again.
+
+deleted the files from repo using comand: git rm --cached <pathToFile>
+Do not forget to commit and push after this.
+Deleted the migration files from local disk as well.
+Deleted the table from database using psql:
+cmd> psql -U postgres
+cmd> enter password
+psql> \l (to view all databases)
+psql> \c shop; (to switch to shop database)
+psql> \d to view tables;
+psql> DROP TABLE alembic_version;
+psql> \d (to check if was correctly deleted.)
+Back to venv> ran migraiton again. flask db migrate -m "base-user"
+(NOTE: since migraiton folder still existed, i did not ran flask db init, just flask db migrate)
+new migraiton file must now appear
+venv> flask db upgrade
