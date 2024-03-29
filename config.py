@@ -4,11 +4,13 @@ import os
 basedir = os.path.abspath(os.path.dirname(__file__))
 
 class Config:
+    TESTING = False
     SECRET_KEY = os.environ.get('SECRET_KEY') or 'some-random-secure-string-to-be-generated-later'
     SQLALCHEMY_DATABASE_URI = "postgresql+psycopg2://postgres:1234@localhost:5432/flask_db"
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 class TestConfig:
+    TESTING = True
     SECRET_KEY = os.environ.get('SECRET_KEY') or 'some-random-secure-string-to-be-generated-later'
     SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, 'app.db')
     SQLALCHEMY_TRACK_MODIFICATIONS = False

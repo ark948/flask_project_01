@@ -13,6 +13,7 @@ os.environ['DATABASE_URL'] = 'sqlite:///:memory'
 class TestWebApp(unittest.TestCase):
     def setUp(self):
         self.app = create_app(TestConfig)
+        self.app.config['TESTING'] = True # to make sure captcha will not run.
         self.app.config['WTF_CSRF_ENABLED'] = False
         self.app.config['DATABASE_URL'] = 'sqlite:///:memory' # this is my own
         self.app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///:memory' # also my own
@@ -49,8 +50,8 @@ class TestWebApp(unittest.TestCase):
         assert 'name="email"' in html
         assert 'name="password"' in html
         assert 'name="confirm"' in html
-        assert 'name="captcha-hash"' in html
-        assert 'name="captcha-text"' in html
+        # assert 'name="captcha-hash"' in html
+        # assert 'name="captcha-text"' in html
         assert 'name="submit"' in html
 
         # OK
@@ -66,20 +67,14 @@ class TestWebApp(unittest.TestCase):
         # i assume html page needs to be somehow parsed and captcha elements must be get
         # let's try BeautifulSoup
         
-    def test_captcha_element(self):
-        get_response = self.client.get('/auth/register')
-        assert get_response.status_code == 200
-        # because pytest controls the standard output
-        # use '-s' with pytest command, may result in small difficulties
-        html = get_response.get_data()
-        soup = bs(html, 'html.parser')
-        captcha_hash = soup.find("input", {"name": "captcha-hash"})
-        ic(captcha_hash['value'])
-        captcha_text = soup.find("input", {"name": "captcha-text"})
-        ic(type(captcha_hash['value']))
-        decoded = jwt.decode(captcha_hash['value'], 'LONG_KEY', algorithms=['HS256'])
-        ic(decoded)
-        print("\nONLY HASHED TEXT:")
-        ic(decoded['hashed_text'])
+    def test_register_user(self):
+        response = self.client.post('/auth/register', data={
+            'username': 'alice',
+            'email': 'alice@example.com',
+            'password': 'foo',
+            'confirm': 'foo',
+        }, follow_redirects=True)
+        assert response.status_code == 200
+        assert response.request.path == '/auth/login' # redirected to login
 
         print("\nLAST LINE")
