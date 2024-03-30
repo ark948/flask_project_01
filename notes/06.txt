@@ -1,0 +1,62 @@
+Adding Logging
+
+Error logging is very useful in production, because in development phase errors will be printed in terminal. This is not suitable in production.
+
+1. Add Email config vars to configuration
+
+2. Flask's uses python's logging package to write logs, and this package is already able to send logs by email.
+All needed is a SMTPHandler to be given to Flask logger object, which is app.logger.
+Add the following code to main init file:
+###############################################################################
+import logging
+from logging.handlers import SMTPHandler
+if not app.debug:
+    if app.config['MAIL_SERVER']:
+        auth = None
+        if app.config['MAIL_USERNAME'] or app.config['MAIL_PASSWORD']:
+            auth = (app.config['MAIL_USERNAME'], app.config['MAIL_PASSWORD'])
+        secure = None
+        if app.config['MAIL_USE_TLS']:
+            secure = ()
+        mail_handler = SMTPHandler(
+            mailhost=(app.config['MAIL_SERVER'], app.config['MAIL_PORT']),
+            fromaddr='no-reply@' + app.config['MAIL_SERVER'],
+            toaddrs=app.config['ADMINS'], subject='Microblog Failure',
+            credentials=auth, secure=secure)
+        mail_handler.setLevel(logging.ERROR)
+        app.logger.addHandler(mail_handler)
+#################################################################################
+
+3. Now we need a server, like a fake SMTP server:
+on a second terminal, run: pip install aiosmtpd
+cmd> aiosmtpd -n -c aiosmtpd.handlers.Debugging -l localhost:8025
+Leave it running...
+
+4. Go back to first terminal and run:
+set MAIL_SERVER=localhost
+set MAIL_PORT=8025
+note: because of this i will change these in config file (this is not part of miguel's tutorial)
+For this part to work, debug must be turned off. Now an error must be triggered.
+Added a special route for this to main blueprint.
+Mail server works fine.
+
+5. Adding logs to file
+Some errors that are not major or are not exceptions can be added to log files for debugging purposes.
+For this, we need to add another handler to application logger, a RotatingFileHandler
+Add the following code to main init
+#########################################################
+from logging.handlers import RotatingFileHandler
+import os
+if not os.path.exists('logs'):
+        os.mkdir('logs')
+    file_handler = RotatingFileHandler('logs/microblog.log', maxBytes=10240,
+                                       backupCount=10)
+    file_handler.setFormatter(logging.Formatter(
+        '%(asctime)s %(levelname)s: %(message)s [in %(pathname)s:%(lineno)d]'))
+    file_handler.setLevel(logging.INFO)
+    app.logger.addHandler(file_handler)
+
+    app.logger.setLevel(logging.INFO)
+    app.logger.info('Microblog startup')
+##########################################################
+

@@ -5,7 +5,8 @@ from flask_migrate import Migrate
 from flask_simple_captcha import CAPTCHA
 from config import CaptchaConfig
 from flask_login import LoginManager
-
+from logging.handlers import SMTPHandler, RotatingFileHandler
+import logging, os
 
 db = SQLAlchemy()
 migrate = Migrate()
@@ -38,5 +39,33 @@ def create_app(config_class=Config):
 
     from app.blog import bp as blog_bp
     app.register_blueprint(blog_bp, url_prefix='/blog')
+
+    # SMTPHandler for app.logger
+    if not app.debug:
+        if app.config['MAIL_SERVER']:
+            auth = None
+            if app.config['MAIL_SERVER'] or app.config['MAIL_PASSWORD']:
+                auth = (app.config['MAIL_USERNAME'], app.config['MAIL_PASSWORD'])
+            secure = None
+            if app.config['MAIL_USE_TLS']:
+                secure = ()
+            mail_handler = SMTPHandler(
+                mailhost=(app.config['MAIL_SERVER'], app.config['MAIL_PORT']),
+                fromaddr='no-reply@' + app.config['MAIL_SERVER'],
+                toaddrs=app.config['ADMINS'], subject='flask_app_failure',
+                credentials=auth, secure=secure
+            )
+            mail_handler.setLevel(logging.ERROR)
+            app.logger.addHandler(mail_handler)
+
+    if not os.path.exists('logs'):
+        os.mkdir('logs')
+    file_handler = RotatingFileHandler('logs/flask_app.log', maxBytes=10240, backupCount=2)
+    file_handler.setFormatter(logging.Formatter('%(asctime)s %(levelname)s: %(message)s [in %(pathname)s:%(lineno)d]'))
+    file_handler.setLevel(logging.INFO)
+    app.logger.addHandler(file_handler)
+    
+    app.logger.setLevel(logging.INFO)
+    app.logger.info('Flask_app startup')
 
     return app

@@ -9,3 +9,7 @@ So i have to disable them for testing. I'll try in config file.
 Testing was ok.
 
 1. Added error handlers. Not in a blueprint, just a file.
+2. Features left, are admin, verification recovery (user), email and logging, ticket system, shop and blog.
+email verification and password recovery depend on email system so it must be implemented. Email system itself depends on logging.
+Let's add logging and then email system.
+Continue on next note file.
