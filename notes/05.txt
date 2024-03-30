@@ -6,3 +6,6 @@ Alright, seems ok. again. Honestly i have no idea what happened. Maybe because a
 But still not sure.
 Anyway...about testing. I have came to conclusion that captcha are made for human eye and are made to be automated.
 So i have to disable them for testing. I'll try in config file.
+Testing was ok.
+
+1. Added error handlers. Not in a blueprint, just a file.
