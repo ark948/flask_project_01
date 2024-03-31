@@ -8,4 +8,8 @@
 
 <p><h4 style="padding-right: 50px;"><a href="{{ url_for('auth.login') }}">ورود</a></h4></p>
 
+{% if current_user.is_authenticated %}
+    <p><h4 style="padding-right: 50px;"><a href="{{ url_for('auth.logout') }}">خروج از حساب</a></h4></p>
+{% endif %}
+
 {% endblock %}

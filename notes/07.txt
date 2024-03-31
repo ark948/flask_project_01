@@ -7,3 +7,5 @@ This was fixed by changing the inner app folder to source.
 (flask_shop_vscode > source - run.py)
 and adding .env file and loading it in config.py file.
 Now shell context works perfectly.
+IMPORTANT: .env file must added to gitignore.
+

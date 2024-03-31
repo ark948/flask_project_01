@@ -1,11 +1,12 @@
 from flask import render_template, url_for, flash, request, redirect, current_app
 from source.auth import bp
-from source.auth.forms import RegisterForm, LoginForm
+from source.auth.forms import RegisterForm, LoginForm, ResetPasswordRequestForm, ResetPasswordForm
 from source import db, Captcha, login_manager
 from flask_login import login_user, logout_user, current_user, login_required
 from source.models.user import User
 from icecream import ic
 from sqlalchemy import select
+from source.email import send_password_reset_email
 
 @bp.route('/')
 def index():
@@ -49,10 +50,8 @@ def old_register():
                 if form.password.data == form.confirm.data:
                     new_user_object.set_password(form.password.data)
                     try:
-                        db.session.add(new_user_object)
-                        db.session.commit()
-                        flash("ثبت نام با موفقیت انجام شد. می توانید وارد سایت شوید.")
-                        return redirect(url_for('auth.login'))
+                        flash("این لینک قدیمی می باشد. لطفا از لینک جدید اسفتاده کنید.")
+                        return redirect(url_for('auth.index'))
                     except Exception as db_error:
                         # database commit error
                         ic(db_error)
@@ -130,6 +129,50 @@ def login():
                 flash("خطا در فرآیند ورود.")
                 return redirect(url_for('auth.login'))
     return render_template('auth/login.html', form=form, captcha=new_captcha_dict)
+
+@bp.route('/reset_password_request', methods=['GET', 'POST'])
+def reset_password_request():
+    if current_user.is_authenticated:
+        flash("شما وارد سایت شده اید. درصورت فراموشی رمز، از سایت خارج شده و سپس  برای بازیابی اقدام کنید.")
+        return redirect(url_for('auth.index'))
+    form = ResetPasswordRequestForm()
+    new_captcha_dict = Captcha.create()
+    if form.validate_on_submit():
+        c_hash = request.form['captcha-hash']
+        c_text = request.form['captcha-text']
+        if Captcha.verify(c_text, c_hash):
+            user = db.session.scalar(
+                select(User).where(User.email==form.email.data)
+            )
+            if user:
+                send_password_reset_email(user)
+                flash("یک ایمیل حاوی لینک بازیابی برای شما ارسال شد.")
+                return redirect(url_for('auth.index'))
+            else:
+                flash("خطا امنیتی")
+                return redirect(url_for('auth.index'))
+        else:
+            flash("کد امنیتی اشتباه وارد شده است.")
+            return redirect(url_for('auth.index'))
+    return render_template('auth/reset_password_request.html', form=form, captcha=new_captcha_dict)
+
+@bp.route('/reset_password/<token>', methods=['GET', 'POST'])
+def reset_password(token):
+    if current_user.is_authenticated:
+        flash("لطفا خارج شوید.")
+        return redirect(url_for('auth.index'))
+    user = User.verify_reset_password_token(token)
+    if not user:
+        # if user was not found
+        flash("خطا داخلی")
+        return redirect(url_for('main.index'))
+    form = ResetPasswordForm()
+    if form.validate_on_submit():
+        user.set_password(form.password.data)
+        db.session.commit()
+        flash('رمزعبور شما با موفقیت تغییر کرد.')
+        return redirect(url_for('auth.index'))
+    return render_template('auth/reset_password.html', form=form)
 
 @bp.route('/logout')
 @login_required
