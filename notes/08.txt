@@ -1,0 +1,1 @@
+New idea about feature to implement: username availability check (from client without submitting Ajax stuff)
