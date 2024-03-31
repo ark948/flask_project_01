@@ -34,39 +34,7 @@ def insert_user_object(username, email, password, confirm):
         return False
 
 # no link to this route
-@bp.route('/old-register', methods=['GET', 'POST'])
-def old_register():
-    if current_user.is_authenticated:
-        flash("شما قبلا در سایت ثبت نام کرده اید.")
-        return redirect(url_for('main.index'))
-    form = RegisterForm()
-    new_captcha_dict = Captcha.create()
-    if form.validate_on_submit():
-        c_hash = request.form['captcha-hash']
-        c_text = request.form['captcha-text']
-        if Captcha.verify(c_text, c_hash):
-            try:
-                new_user_object = User(form.username.data, form.email.data)
-                if form.password.data == form.confirm.data:
-                    new_user_object.set_password(form.password.data)
-                    try:
-                        flash("این لینک قدیمی می باشد. لطفا از لینک جدید اسفتاده کنید.")
-                        return redirect(url_for('auth.index'))
-                    except Exception as db_error:
-                        # database commit error
-                        ic(db_error)
-                        flash("خطا پایگاه داده. لطفا نام کاربری و ایمیل دیگری وارد کنید.")
-                        return redirect(url_for('auth.register'))
-            except Exception as register_error:
-                # User model and password process error
-                ic(register_error)
-                flash("خطای سیستم. لطفا لحظاتی بعد مجدد تلاش کرده و یا با ")
-        else:
-            # captcha error
-            print("Captcha Failed")
-            flash("کد امنیتی اشتباه وارد شده است. دوباره تلاش کنید.")
-            return redirect(url_for('auth.register'))
-    return render_template('auth/old_register.html', form=form, captcha=new_captcha_dict)
+# old register route deleted
 
 @bp.route('/register', methods=['GET', 'POST'])
 def register():
