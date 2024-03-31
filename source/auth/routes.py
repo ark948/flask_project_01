@@ -1,9 +1,9 @@
 from flask import render_template, url_for, flash, request, redirect, current_app
-from app.auth import bp
-from app.auth.forms import RegisterForm, LoginForm
-from app import db, Captcha, login_manager
+from source.auth import bp
+from source.auth.forms import RegisterForm, LoginForm
+from source import db, Captcha, login_manager
 from flask_login import login_user, logout_user, current_user, login_required
-from app.models.user import User
+from source.models.user import User
 from icecream import ic
 from sqlalchemy import select
 

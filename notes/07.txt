@@ -1,0 +1,9 @@
+Before implementing email verification and password reset, i fixed a small problem.
+
+When the inner app folder was named 'app', some context shell variables would not work, like sa and so.
+(flask_shop_vscode > app - run.py)
+
+This was fixed by changing the inner app folder to source.
+(flask_shop_vscode > source - run.py)
+and adding .env file and loading it in config.py file.
+Now shell context works perfectly.

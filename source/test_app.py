@@ -1,6 +1,6 @@
 import unittest, os
 from flask import current_app
-from app import create_app, db
+from source import create_app, db
 from flask_simple_captcha import CAPTCHA
 from icecream import ic
 from bs4 import BeautifulSoup as bs

@@ -5,6 +5,7 @@ from flask_migrate import Migrate
 from flask_simple_captcha import CAPTCHA
 from config import CaptchaConfig
 from flask_login import LoginManager
+from flask_mail import Mail
 from logging.handlers import SMTPHandler, RotatingFileHandler
 import logging, os
 
@@ -12,6 +13,7 @@ db = SQLAlchemy()
 migrate = Migrate()
 Captcha = CAPTCHA(config=CaptchaConfig)
 login_manager = LoginManager()
+mail = Mail()
 
 def create_app(config_class=Config):
     app = Flask(__name__)
@@ -23,21 +25,22 @@ def create_app(config_class=Config):
     login_manager.init_app(app)
     login_manager.login_view = 'auth.login'
     login_manager.login_message = "برای دسترسی به این صفحه باید وارد سایت شوید."
+    mail.init_app(app)
 
     # test route removed by adding main blueprint
-    from app.main import bp as main_bp
+    from source.main import bp as main_bp
     app.register_blueprint(main_bp)
 
-    from app.error_handler import error_handler_bp
+    from source.error_handler import error_handler_bp
     app.register_blueprint(error_handler_bp)
 
-    from app.auth import bp as auth_bp
+    from source.auth import bp as auth_bp
     app.register_blueprint(auth_bp, url_prefix='/auth')
 
-    from app.shop import bp as shop_bp
+    from source.shop import bp as shop_bp
     app.register_blueprint(shop_bp, url_prefix='/shop')
 
-    from app.blog import bp as blog_bp
+    from source.blog import bp as blog_bp
     app.register_blueprint(blog_bp, url_prefix='/blog')
 
     # SMTPHandler for app.logger

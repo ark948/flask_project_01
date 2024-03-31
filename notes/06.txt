@@ -60,3 +60,5 @@ if not os.path.exists('logs'):
     app.logger.info('Microblog startup')
 ##########################################################
 
+Email based and file based logging are now complete. Now we can implement User email verification and password reset.
+Continue on next note.

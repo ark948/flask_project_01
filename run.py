@@ -1,7 +1,7 @@
-from app import create_app, db
+from source import create_app, db
 import sqlalchemy as sa
 import sqlalchemy.orm as so
-from app.models.user import User
+from source.models.user import User
 import os
 
 app = create_app()

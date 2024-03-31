@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template
-from app import db
+from source import db
 
 error_handler_bp = Blueprint('error', __name__)
 

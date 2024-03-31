@@ -1,6 +1,6 @@
 from flask import render_template, redirect, url_for, flash
 from flask_login import current_user, login_required
-from app.main import bp
+from source.main import bp
 
 @bp.route('/')
 def index():

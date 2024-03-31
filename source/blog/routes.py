@@ -1,4 +1,4 @@
-from app.blog import bp
+from source.blog import bp
 from flask import render_template
 
 @bp.route('/')
