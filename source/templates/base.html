@@ -25,12 +25,17 @@
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="{{ url_for('main.index') }}">صفحه اصلی</a>
           </li>
-          <!-- <li class="nav-item">
-            <a class="nav-link" href="{{ url_for('auth.index') }}">ناحیه کاربری</a>
-          </li> -->
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="{{ url_for('shop.index') }}">فروشگاه</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="{{ url_for('blog.index') }}">وبلاگ</a>
+          </li>
           {% if current_user.is_authenticated %}
           <li class="nav-item">
-            نام کاربری: {{ current_user.username }}
+            <a class="nav-link active" aria-current="page" href="{{ url_for('auth.profile', id=current_user.id) }}">پروفایل {{ current_user.username }}</a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="{{ url_for('auth.logout') }}">خروج</a>
           </li>
           {% else %}
@@ -38,17 +43,6 @@
             <a class="nav-link active" aria-current="page" href="{{ url_for('auth.index') }}">ناحیه کاربری</a>
           </li>
           {% endif %}
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="{{ url_for('shop.index') }}">فروشگاه</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="{{ url_for('blog.index') }}">بلاگ</a>
-          </li>
-        </ul>
-        <!-- <form class="d-flex" role="search">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success" type="submit">Search</button>
-        </form> -->
       </div>
     </div>
   </nav>

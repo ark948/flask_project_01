@@ -1,1 +1,10 @@
 New idea about feature to implement: username availability check (from client without submitting Ajax stuff)
+
+Also do something about aiosmtpd server, some sort of a cli shortcut
+
+Implementing email verification,
+For that profile page is required.
+
+Implementing profile page:
+1. Add a route to auth
+2. Add just display user information

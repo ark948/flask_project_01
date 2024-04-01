@@ -98,6 +98,11 @@ def login():
                 return redirect(url_for('auth.login'))
     return render_template('auth/login.html', form=form, captcha=new_captcha_dict)
 
+@bp.route('/profile/<int:id>', methods=['GET', 'POST'])
+@login_required
+def profile(id):
+    return render_template('auth/profile.html')
+
 @bp.route('/reset_password_request', methods=['GET', 'POST'])
 def reset_password_request():
     if current_user.is_authenticated:
