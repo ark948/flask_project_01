@@ -110,19 +110,14 @@ def login():
                 return redirect(url_for('auth.login'))
     return render_template('auth/login.html', form=form, captcha=new_captcha_dict)
 
+# jinja custom filter
 @bp.add_app_template_filter
-def to_persian(datetime_object):
-    return convertdate.persian.from_gregorian(int(datetime_object.strftime("%Y")), int(datetime_object.strftime("%m")), int(datetime_object.strftime("%d")))
+def to_persian(dt):
+    return convertdate.persian.from_gregorian(int(dt.strftime("%Y")), int(dt.strftime("%m")), int(dt.strftime("%d")))
 
 @bp.route('/profile', methods=['GET', 'POST'])
 @login_required
 def profile():
-    # year = int(current_user.verified_on.strftime("%Y"))
-    # month = int(current_user.verified_on.strftime("%m"))
-    # day = int(current_user.verified_on.strftime("%d"))
-    # verification_persian = convertdate.persian.from_gregorian(year, month, day)
-    # environment = jinja2.Environment()
-    # environment.filters['persian_time'] = verification_persian
     return render_template('auth/profile.html')
 
 @bp.route('/email_verification_request', methods=['GET', 'POST'])
