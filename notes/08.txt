@@ -8,3 +8,7 @@ For that profile page is required.
 Implementing profile page:
 1. Add a route to auth
 2. Add just display user information
+3. Add a link to confirm the email to which verification token will be sent
+4. Upon submitting that form, we will pass that user object to email.py.
+5. email.py will use that user object to generate a token. (a method of uesr model)
+6. email.py will use its send_email function to send a email containing that token to user's email.

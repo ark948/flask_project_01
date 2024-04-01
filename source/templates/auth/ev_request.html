@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div style="padding-right: 50px; padding-top: 50px;">
+    <p>
+        یک ایمیل حاوی لینک تایید به آدرس ایمیل زیر ارسال خواهد شد.
+        در صورتی که ایمیل زیر برای شما نیست،
+        لطفا از سایت خارج شده و دوباره با ایمیل درست در سایت ثبت نام کنید.
+    </p>
+    <p>
+        {{ current_user.email }}
+    </p>
+
+    {% from "macros/_formhelpers.html" import render_field %}
+    <form method="post">
+        {{ form.csrf_token }}
+        {{ render_field(form.submit) }}
+    </form>
+</div>
+
+{% endblock %}

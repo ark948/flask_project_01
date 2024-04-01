@@ -1,12 +1,24 @@
-from flask import render_template, url_for, flash, request, redirect, current_app
+from flask import (
+    render_template, url_for, flash, request, redirect, current_app
+)
 from source.auth import bp
-from source.auth.forms import RegisterForm, LoginForm, ResetPasswordRequestForm, ResetPasswordForm
-from source import db, Captcha, login_manager
-from flask_login import login_user, logout_user, current_user, login_required
+from source.auth.forms import (
+    RegisterForm, LoginForm, ResetPasswordRequestForm, ResetPasswordForm, EmailVerificationRequestForm
+)
+from source import db, Captcha
+from flask_login import (
+    login_user, logout_user, current_user, login_required
+)
 from source.models.user import User
 from icecream import ic
+ic.configureOutput(includeContext=True)
 from sqlalchemy import select
-from source.email import send_password_reset_email
+from source.email import (
+    send_password_reset_email, send_email_verification_email
+)
+import datetime
+import convertdate
+import jinja2
 
 @bp.route('/')
 def index():
@@ -98,11 +110,57 @@ def login():
                 return redirect(url_for('auth.login'))
     return render_template('auth/login.html', form=form, captcha=new_captcha_dict)
 
-@bp.route('/profile/<int:id>', methods=['GET', 'POST'])
+@bp.add_app_template_filter
+def to_persian(datetime_object):
+    return convertdate.persian.from_gregorian(int(datetime_object.strftime("%Y")), int(datetime_object.strftime("%m")), int(datetime_object.strftime("%d")))
+
+@bp.route('/profile', methods=['GET', 'POST'])
 @login_required
-def profile(id):
+def profile():
+    # year = int(current_user.verified_on.strftime("%Y"))
+    # month = int(current_user.verified_on.strftime("%m"))
+    # day = int(current_user.verified_on.strftime("%d"))
+    # verification_persian = convertdate.persian.from_gregorian(year, month, day)
+    # environment = jinja2.Environment()
+    # environment.filters['persian_time'] = verification_persian
     return render_template('auth/profile.html')
 
+@bp.route('/email_verification_request', methods=['GET', 'POST'])
+@login_required
+def email_verification_request():
+    form = EmailVerificationRequestForm()
+    if form.validate_on_submit():
+        send_email_verification_email(current_user)
+    return render_template('auth/ev_request.html', form=form)
+
+@bp.route('/verify_email/<token>', methods=['GET', 'POST'])
+@login_required
+def verify_email(token):
+    result = None
+    try:
+        result = User.verify_email_verification_token(token)
+        ic(result)
+    except Exception as tok_ver_er:
+        ic(tok_ver_er)
+        flash("خطا در فرایند تایید، لطفا دوباره تلاش کنید.")
+        return redirect(url_for('main.index'))
+    if result == True:
+        try:
+            user_object = User.query.get(current_user.id)
+            user_object.is_verified = True
+            user_object.verified_on = datetime.datetime.now()
+            db.session.commit()
+            flash("ایمیل شما با موفقیت تایید شد.")
+            return redirect(url_for('main.index'))
+        except Exception as user_ver_er:
+            ic(user_ver_er)
+            flash('خطا در فرایند تایید')
+            return redirect(url_for('main.index'))
+    else:
+        flash("خطا در فرایند تایید. لطفا دوباره تلاش کنید.")
+        return redirect(url_for('main.index'))
+
+        
 @bp.route('/reset_password_request', methods=['GET', 'POST'])
 def reset_password_request():
     if current_user.is_authenticated:

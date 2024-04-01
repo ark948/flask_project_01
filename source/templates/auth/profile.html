@@ -2,6 +2,21 @@
 
 {% block content %}
 
-<h3>پروفایل کاربری {{ current_user.username }}</h3>
+<div style="padding-right: 50px; padding-top: 50px;">
+    <h4>پروفایل کاربری {{ current_user.username }}</h4>
+    <h4>آدرس ایمیل: {{ current_user.email }}</h4>
+    <h4>ایمیل تایید شده؟
+        {% if current_user.is_verified %}
+        بله
+        <br>
+        تایید شده در: {{ current_user.verified_on|to_persian }}
+        {% else %}
+        خیر
+        <h4>
+            <a href="{{ url_for('auth.email_verification_request') }}">برای تایید کلیک کنید.</a>
+        </h4>
+        {% endif %}
+    </h4>
+</div>
 
 {% endblock %}

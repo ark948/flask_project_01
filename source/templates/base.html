@@ -33,7 +33,7 @@
           </li>
           {% if current_user.is_authenticated %}
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="{{ url_for('auth.profile', id=current_user.id) }}">پروفایل {{ current_user.username }}</a>
+            <a class="nav-link active" aria-current="page" href="{{ url_for('auth.profile') }}">پروفایل {{ current_user.username }}</a>
           </li>
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="{{ url_for('auth.logout') }}">خروج</a>

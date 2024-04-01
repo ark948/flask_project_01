@@ -23,3 +23,7 @@ class ResetPasswordForm(FlaskForm):
     password = PasswordField('رمزعبور جدید', validators=[DataRequired()])
     confirm = PasswordField('تکرار رمز', validators=[DataRequired(), EqualTo('password')])
     submit = SubmitField('ثبت')
+
+class EmailVerificationRequestForm(FlaskForm):
+    # email = EmailField('آدرس ایمیل', validators=[DataRequired()])
+    submit = SubmitField('تایید')

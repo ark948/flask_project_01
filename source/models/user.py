@@ -4,6 +4,7 @@ from flask_login import UserMixin
 from flask import current_app
 from time import time
 import jwt
+from icecream import ic
 
 class User(UserMixin, db.Model):
     __tablename__ = 'user'
@@ -40,8 +41,24 @@ class User(UserMixin, db.Model):
             return
         return db.session.get(User, id)
     
+    def get_email_verification_token(self, expires_in=600):
+        return jwt.encode(
+            {'verify_email': self.id, 'exp': time() + expires_in},
+            current_app.config['SECRET_KEY'], algorithm='HS256'
+        )
+    
+    @classmethod
+    def verify_email_verification_token(self, token):
+        try:
+            result = jwt.decode(token, current_app.config['SECRET_KEY'], algorithms=['HS256'])['verify_email']
+        except Exception as error:
+            # if any error occurred, return false, otherwise true
+            ic(error)
+            return False
+        return True
+    
     def __repr__(self) -> str:
-        return f'<User {self.id}'
+        return f'<User {self.id}>'
     
 @login_manager.user_loader
 def load_user(user_id):

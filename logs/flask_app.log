@@ -1,30 +1,52 @@
-2024-03-31 18:56:25,857 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:72]
-2024-03-31 18:59:38,625 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:72]
-2024-03-31 19:00:14,433 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:72]
-2024-03-31 19:00:42,419 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:72]
-2024-03-31 19:05:41,457 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:72]
-2024-03-31 19:06:52,650 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:72]
-2024-03-31 22:05:48,968 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:72]
-2024-03-31 22:29:52,169 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:72]
-2024-03-31 22:30:57,198 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:72]
-2024-03-31 22:33:43,627 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:72]
-2024-03-31 22:36:46,896 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:72]
-2024-03-31 22:42:33,401 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:72]
-2024-03-31 22:43:52,662 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:72]
-2024-03-31 22:48:03,085 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:72]
-2024-03-31 22:49:04,851 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:72]
-2024-04-01 16:59:28,981 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:72]
-2024-04-01 17:20:16,969 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:72]
-2024-04-01 17:21:12,340 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:72]
-2024-04-01 17:21:51,073 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:72]
-2024-04-01 17:21:56,968 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:72]
-2024-04-01 17:23:16,596 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:72]
-2024-04-01 17:28:37,483 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:72]
-2024-04-01 17:29:50,217 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:72]
-2024-04-01 17:42:08,816 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:72]
-2024-04-01 17:51:03,081 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:72]
-2024-04-01 17:51:52,860 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:72]
-2024-04-01 17:52:41,463 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:72]
-2024-04-01 17:54:50,592 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:72]
-2024-04-01 17:55:48,364 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:72]
-2024-04-01 17:57:10,907 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:72]
+2024-04-01 23:01:55,281 ERROR: Exception on /auth/profile [GET] [in C:\Users\Arman\Documents\flask_shop_vscode\venv\Lib\site-packages\flask\app.py:828]
+Traceback (most recent call last):
+  File "C:\Users\Arman\Documents\flask_shop_vscode\venv\Lib\site-packages\flask\app.py", line 1463, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Arman\Documents\flask_shop_vscode\venv\Lib\site-packages\flask\app.py", line 872, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Arman\Documents\flask_shop_vscode\venv\Lib\site-packages\flask\app.py", line 870, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Arman\Documents\flask_shop_vscode\venv\Lib\site-packages\flask\app.py", line 855, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Arman\Documents\flask_shop_vscode\venv\Lib\site-packages\flask_login\utils.py", line 290, in decorated_view
+    return current_app.ensure_sync(func)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Arman\Documents\flask_shop_vscode\source\auth\routes.py", line 116, in profile
+    year = int(current_user.is_verified.srtftime("%Y"))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'bool' object has no attribute 'srtftime'
+2024-04-01 23:02:42,152 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:72]
+2024-04-01 23:02:44,061 ERROR: Exception on /auth/profile [GET] [in C:\Users\Arman\Documents\flask_shop_vscode\venv\Lib\site-packages\flask\app.py:828]
+Traceback (most recent call last):
+  File "C:\Users\Arman\Documents\flask_shop_vscode\venv\Lib\site-packages\flask\app.py", line 1463, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Arman\Documents\flask_shop_vscode\venv\Lib\site-packages\flask\app.py", line 872, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Arman\Documents\flask_shop_vscode\venv\Lib\site-packages\flask\app.py", line 870, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Arman\Documents\flask_shop_vscode\venv\Lib\site-packages\flask\app.py", line 855, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Arman\Documents\flask_shop_vscode\venv\Lib\site-packages\flask_login\utils.py", line 290, in decorated_view
+    return current_app.ensure_sync(func)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Arman\Documents\flask_shop_vscode\source\auth\routes.py", line 116, in profile
+    year = int(current_user.verified_on.srtftime("%Y"))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'datetime.datetime' object has no attribute 'srtftime'
+2024-04-01 23:04:24,133 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:72]
+2024-04-01 23:06:24,919 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:72]
+2024-04-01 23:07:22,675 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:72]
+2024-04-01 23:14:07,169 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:72]
+2024-04-01 23:15:48,337 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:72]
+2024-04-01 23:16:47,375 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:72]
+2024-04-01 23:17:53,995 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:72]
+2024-04-01 23:18:16,073 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:72]
+2024-04-01 23:21:47,921 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:72]
