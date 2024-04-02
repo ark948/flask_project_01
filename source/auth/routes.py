@@ -50,12 +50,11 @@ def insert_user_object(username, email, password, confirm):
         return False
 
 # no link to this route
-# old register route deleted
+# old register route deleted (no support for testing - captcha)
 
 @bp.route('/register', methods=['GET', 'POST'])
 def register():
     if current_user.is_authenticated:
-        flash("شما قبلا در سایت ثبت نام کرده اید.")
         return redirect(url_for('main.index'))
     form = RegisterForm()
     if current_app.config['TESTING'] == True:
@@ -63,10 +62,8 @@ def register():
         if form.validate_on_submit():
             result = insert_user_object(form.username.data, form.email.data, form.password.data, form.confirm.data)
             if result == True:
-                flash("ثبت نام با موفقیت انجام شد.")
                 return redirect(url_for('auth.login'))
             elif result == False:
-                flash("خطا در فرایند ثبت نام.")
                 return redirect(url_for('auth.register'))
         return render_template('auth/register.html', form=form)
     elif current_app.config['TESTING'] == False or current_app.config['TESTING'] == None:
@@ -88,31 +85,44 @@ def register():
                 return redirect(url_for('auth.register'))
         return render_template('auth/register.html', form=form, captcha=new_captcha_dict)
 
+# old login route removed (no support for testing - captcha)
+
 @bp.route('/login', methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
         flash("شما وارد سایت شده اید.")
         return redirect(url_for('main.index'))
-    new_captcha_dict = Captcha.create()
-    form = LoginForm()
-    if form.validate_on_submit():
-        c_hash = request.form['captcha-hash']
-        c_text = request.form['captcha-text']
-        if Captcha.verify(c_text, c_hash):
-            try:
-                user = db.session.scalar(select(User).where(User.username==form.username.data))
-                if user is None or not user.check_password(form.password.data):
-                    # if user did not exist or check_password returned false
-                    flash("نام کاربری و یا پسورد اشتباه است.")
-                    return redirect(url_for('auth.login'))
+    if current_app.config['TESTING'] == True:
+        form = LoginForm()
+        try:
+            user = db.session.scalar(select(User).where(User.username==form.username.data))
+            if user is None or user.check_password(form.password.data):
                 login_user(user, remember=form.remember_me.data)
-                flash("با موفقیت وارد سایت شدید.")
                 return redirect(url_for('main.index'))
-            except Exception as login_error:
-                ic(login_error)
-                flash("خطا در فرآیند ورود.")
-                return redirect(url_for('auth.login'))
-    return render_template('auth/login.html', form=form, captcha=new_captcha_dict)
+        except Exception as login_error_testing:
+            flash("Error")
+            return redirect(url_for('auth.login'))
+        return render_template('auth/login.html', form=form)
+    elif current_app.config['TESTING'] == False or current_app.config['TESTING'] == None:
+        new_captcha_dict = Captcha.create()
+        form = LoginForm()
+        if form.validate_on_submit():
+            c_hash = request.form['captcha-hash']
+            c_text = request.form['captcha-text']
+            if Captcha.verify(c_text, c_hash):
+                try:
+                    user = db.session.scalar(select(User).where(User.username==form.username.data))
+                    if user is None or not user.check_password(form.password.data):
+                        flash("نام کاربری و یا پسورد اشتباه است.")
+                        return redirect(url_for('auth.login'))
+                    login_user(user, remember=form.remember_me.data)
+                    flash("با موفقیت وارد سایت شدید.")
+                    return redirect(url_for('main.index'))
+                except Exception as login_error:
+                    ic(login_error)
+                    flash("خطا در فرآیند ورود.")
+                    return redirect(url_for('auth.login'))
+        return render_template('auth/login.html', form=form, captcha=new_captcha_dict)
 
 @bp.route('/profile', methods=['GET', 'POST'])
 @login_required

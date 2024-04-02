@@ -22,7 +22,7 @@ class Config:
 class TestConfig:
     TESTING = True
     SECRET_KEY = os.environ.get('SECRET_KEY') or 'some-random-secure-string-to-be-generated-later'
-    SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, 'app.db')
+    SQLALCHEMY_DATABASE_URI = 'sqlite:///:memory'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     DEBUG = True
 
