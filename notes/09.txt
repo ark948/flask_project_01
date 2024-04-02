@@ -1,3 +1,5 @@
 trying to fix routes, change underscore to dash in auth
 
 Patterns to consider: keep test routes to minimal, no redirect, no flash message
+
+Changed log file backup to 0, Adds 'Roff' to repo languages

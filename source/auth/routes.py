@@ -127,9 +127,47 @@ def login():
 @bp.route('/profile', methods=['GET', 'POST'])
 @login_required
 def profile():
-    profile_form = ProfileEditForm()
+    profile_form = ProfileEditForm(
+        username=current_user.username,
+        email=current_user.email,
+        phone_number=current_user.phone_number
+    )
+    
     password_form = PasswordChangeForm()
+
     return render_template('auth/profile.html', form1=profile_form, form2=password_form)
+
+@bp.route('/edit-profile', methods=['POST'])
+@login_required
+def edit_profile():
+    print("[edit-profile] invoked.")
+    current_username = current_user.username
+    current_email = current_user.email
+    try:
+        user = User.query.get(current_user.id)
+    except:
+        flash("خطا")
+        return redirect(url_for('auth.profile'))
+    if current_username == request.form['username'] and current_email == request.form['email']:
+        flash("تغییری یافت نشد.")
+        return redirect(url_for('auth.profile'))
+    user.username = request.form['username']
+    user.email = request.form['email']
+    try:
+        if user.email != current_email:
+            user.is_verified = False
+            user.verified_on = None
+        db.session.commit()
+        flash("تعییرات با موفقیت ثبت شد.")
+    except Exception as edit_error:
+        flash("خطا در فرایند ویرایش، نام کاربری یا ایمیل قبلا ثبت شده است.")
+        return redirect(url_for('auth.profile'))
+    return redirect(url_for('auth.profile'))
+
+@bp.route('/change-password', methods=['POST'])
+@login_required
+def change_password():
+    print("[change-password] invoked.")
 
 @bp.route('/email-verification-request', methods=['GET', 'POST'])
 @login_required

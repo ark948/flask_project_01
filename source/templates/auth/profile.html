@@ -23,7 +23,7 @@
     {% from "macros/_formhelpers.html" import render_field %}
 
     ویرایش مشخصات:
-    <form method="post">
+    <form action="{{ url_for('auth.edit_profile') }}" method="post">
         {{ form1.csrf_token }}
         {{ render_field(form1.username )}}
         {{ render_field(form1.email )}} <h6 style="display: inline;">تغییر ایمیل نیاز به تایید مجدد دارد.</h6>
@@ -34,7 +34,7 @@
     <br>
 
     تغییر رمز عبور:
-    <form method="post">
+    <form action="{{ url_for('auth.change_password') }}" method="post">
         {{ form2.csrf_token }}
         {{ render_field(form2.current) }}
         {{ render_field(form2.password) }}
