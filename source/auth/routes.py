@@ -122,6 +122,9 @@ def profile():
 @bp.route('/email-verification-request', methods=['GET', 'POST'])
 @login_required
 def email_verification_request():
+    if current_user.is_verified == True:
+        flash("ایمیل شما قبلا تایید شده است.")
+        return redirect(url_for('auth.profile'))
     form = EmailVerificationRequestForm()
     if form.validate_on_submit():
         send_email_verification_email(current_user)
@@ -130,6 +133,9 @@ def email_verification_request():
 @bp.route('/verify-email/<token>', methods=['GET', 'POST'])
 @login_required
 def verify_email(token):
+    if current_user.is_verified == True:
+        flash("ایمیل شما قبلا تایید شده است.")
+        return redirect(url_for('auth.profile'))
     result = None
     try:
         result = User.verify_email_verification_token(token)
