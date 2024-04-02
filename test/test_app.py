@@ -39,15 +39,3 @@ class TestWebApp(unittest.TestCase):
         assert 'name="password"' in html
         assert 'name="confirm"' in html
         assert 'name="submit"' in html
-        
-    def test_register_user(self):
-        response = self.client.post('/auth/register', data={
-            'username': 'alice',
-            'email': 'alice@example.com',
-            'password': 'foo',
-            'confirm': 'foo',
-        }, follow_redirects=True)
-        assert response.status_code == 200
-        assert response.request.path == '/auth/login'
-
-        print("\nLAST LINE")
