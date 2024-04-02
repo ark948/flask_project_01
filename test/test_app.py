@@ -39,3 +39,32 @@ class TestWebApp(unittest.TestCase):
         assert 'name="password"' in html
         assert 'name="confirm"' in html
         assert 'name="submit"' in html
+
+    def test_login_form(self):
+        response = self.client.get('/auth/login')
+        assert response.status_code == 200
+        html = response.get_data(as_text=True)
+
+        assert 'name="username"' in html
+        assert 'name="password"' in html
+        assert 'name="remember_me"' in html
+        assert 'name="submit"' in html
+
+    def test_register_user(self):
+        response = self.client.post('/auth/register', data={
+            'username': 'alice',
+            'email': 'alice@example.com',
+            'password': 'foo',
+            'confirm': 'foo',
+        })
+        
+        assert response.status_code == 200
+
+        response = self.client.post('/auth/register', data={
+            'username': 'alice',
+            'password': 'foo',
+            'remember_me': False
+        })
+
+        assert response.status_code == 200
+    
