@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, EmailField, PasswordField, SubmitField, BooleanField
+from wtforms import StringField, EmailField, PasswordField, SubmitField, BooleanField, TelField
 from wtforms.validators import DataRequired, EqualTo
 
 class RegisterForm(FlaskForm):
@@ -27,3 +27,15 @@ class ResetPasswordForm(FlaskForm):
 class EmailVerificationRequestForm(FlaskForm):
     # email = EmailField('آدرس ایمیل', validators=[DataRequired()])
     submit = SubmitField('تایید')
+
+class ProfileEditForm(FlaskForm):
+    username = StringField('نام کاربری', validators=[DataRequired()])
+    email = EmailField('ایمیل', validators=[DataRequired()])
+    phone_number = TelField('شماره تلفن')
+    submit = SubmitField('ویرایش')
+
+class PasswordChangeForm(FlaskForm):
+    current = PasswordField('رمزعبور فعلی', validators=[DataRequired()])
+    password = PasswordField('رمزعبور جدید', validators=[DataRequired()])
+    confirm = PasswordField('تکرار رمزعبور جدید', validators=[DataRequired(), EqualTo('password')])
+    submit = SubmitField('ثبت')

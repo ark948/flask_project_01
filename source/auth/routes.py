@@ -1,23 +1,30 @@
 from flask import (
     render_template, url_for, flash, request, redirect, current_app
 )
+
 from source.auth import bp
 from source.auth.forms import (
-    RegisterForm, LoginForm, ResetPasswordRequestForm, ResetPasswordForm, EmailVerificationRequestForm
+    RegisterForm, LoginForm, ResetPasswordRequestForm, ResetPasswordForm, EmailVerificationRequestForm, ProfileEditForm, PasswordChangeForm
 )
+
 from source import db, Captcha
 from flask_login import (
     login_user, logout_user, current_user, login_required
 )
+
 from source.models.user import User
-from icecream import ic
-ic.configureOutput(includeContext=True)
-from sqlalchemy import select
+from sqlalchemy import (
+    select
+)
+
 from source.email import (
     send_password_reset_email, send_email_verification_email
 )
-import datetime
-import convertdate
+
+import datetime, convertdate
+
+from icecream import ic
+ic.configureOutput(includeContext=True)
 
 # jinja custom filter
 @bp.add_app_template_filter
@@ -120,7 +127,9 @@ def login():
 @bp.route('/profile', methods=['GET', 'POST'])
 @login_required
 def profile():
-    return render_template('auth/profile.html')
+    profile_form = ProfileEditForm()
+    password_form = PasswordChangeForm()
+    return render_template('auth/profile.html', form1=profile_form, form2=password_form)
 
 @bp.route('/email-verification-request', methods=['GET', 'POST'])
 @login_required
@@ -162,7 +171,6 @@ def verify_email(token):
     else:
         flash("خطا در فرایند تایید. لطفا دوباره تلاش کنید.")
         return redirect(url_for('main.index'))
-
         
 @bp.route('/reset-password-request', methods=['GET', 'POST'])
 def reset_password_request():

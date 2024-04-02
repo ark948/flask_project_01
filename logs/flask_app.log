@@ -1,75 +1,58 @@
-2024-04-02 18:24:49,854 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:72]
-2024-04-02 18:24:49,870 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:72]
-2024-04-02 18:24:49,870 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:72]
-2024-04-02 18:24:49,886 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:72]
-2024-04-02 18:24:49,886 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:72]
-2024-04-02 18:24:49,886 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:72]
-2024-04-02 18:24:49,911 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:72]
-2024-04-02 18:24:49,911 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:72]
-2024-04-02 18:24:49,911 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:72]
-2024-04-02 18:24:49,911 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:72]
-2024-04-02 18:24:50,043 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:72]
-2024-04-02 18:24:50,043 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:72]
-2024-04-02 18:24:50,043 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:72]
-2024-04-02 18:24:50,043 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:72]
-2024-04-02 18:24:50,043 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:72]
-2024-04-02 18:24:53,405 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:72]
-2024-04-02 18:24:53,405 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:72]
-2024-04-02 18:24:53,405 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:72]
-2024-04-02 18:24:53,436 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:72]
-2024-04-02 18:24:53,436 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:72]
-2024-04-02 18:24:53,436 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:72]
-2024-04-02 18:24:53,452 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:72]
-2024-04-02 18:24:53,452 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:72]
-2024-04-02 18:24:53,452 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:72]
-2024-04-02 18:24:53,452 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:72]
-2024-04-02 18:24:53,595 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:72]
-2024-04-02 18:24:53,595 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:72]
-2024-04-02 18:24:53,595 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:72]
-2024-04-02 18:24:53,595 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:72]
-2024-04-02 18:24:53,595 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:72]
-2024-04-02 18:24:56,837 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:72]
-2024-04-02 18:24:56,852 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:72]
-2024-04-02 18:24:56,852 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:72]
-2024-04-02 18:24:56,868 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:72]
-2024-04-02 18:24:56,868 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:72]
-2024-04-02 18:24:56,868 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:72]
-2024-04-02 18:24:56,885 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:72]
-2024-04-02 18:24:56,885 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:72]
-2024-04-02 18:24:56,885 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:72]
-2024-04-02 18:24:56,885 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:72]
-2024-04-02 18:24:57,026 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:72]
-2024-04-02 18:24:57,026 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:72]
-2024-04-02 18:24:57,026 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:72]
-2024-04-02 18:24:57,026 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:72]
-2024-04-02 18:24:57,026 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:72]
-2024-04-02 18:25:01,294 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:72]
-2024-04-02 18:25:01,296 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:72]
-2024-04-02 18:25:01,296 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:72]
-2024-04-02 18:25:01,326 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:72]
-2024-04-02 18:25:01,326 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:72]
-2024-04-02 18:25:01,326 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:72]
-2024-04-02 18:25:01,341 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:72]
-2024-04-02 18:25:01,341 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:72]
-2024-04-02 18:25:01,341 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:72]
-2024-04-02 18:25:01,341 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:72]
-2024-04-02 18:25:01,482 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:72]
-2024-04-02 18:25:01,482 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:72]
-2024-04-02 18:25:01,482 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:72]
-2024-04-02 18:25:01,482 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:72]
-2024-04-02 18:25:01,482 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:72]
-2024-04-02 18:25:04,728 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:72]
-2024-04-02 18:25:04,741 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:72]
-2024-04-02 18:25:04,741 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:72]
-2024-04-02 18:25:04,756 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:72]
-2024-04-02 18:25:04,756 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:72]
-2024-04-02 18:25:04,756 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:72]
-2024-04-02 18:25:04,788 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:72]
-2024-04-02 18:25:04,788 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:72]
-2024-04-02 18:25:04,788 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:72]
-2024-04-02 18:25:04,788 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:72]
-2024-04-02 18:25:04,918 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:72]
-2024-04-02 18:25:04,918 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:72]
-2024-04-02 18:25:04,918 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:72]
-2024-04-02 18:25:04,918 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:72]
-2024-04-02 18:25:04,918 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:72]
+2024-04-02 18:45:46,616 ERROR: Exception on /auth/profile [GET] [in C:\Users\Arman\Documents\flask_shop_vscode\venv\Lib\site-packages\flask\app.py:828]
+Traceback (most recent call last):
+  File "C:\Users\Arman\Documents\flask_shop_vscode\venv\Lib\site-packages\flask\app.py", line 1463, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Arman\Documents\flask_shop_vscode\venv\Lib\site-packages\flask\app.py", line 872, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Arman\Documents\flask_shop_vscode\venv\Lib\site-packages\flask\app.py", line 870, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Arman\Documents\flask_shop_vscode\venv\Lib\site-packages\flask\app.py", line 855, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Arman\Documents\flask_shop_vscode\venv\Lib\site-packages\flask_login\utils.py", line 290, in decorated_view
+    return current_app.ensure_sync(func)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Arman\Documents\flask_shop_vscode\source\auth\routes.py", line 132, in profile
+    return render_template('auth/profile.html', form1=profile_form, form2=password_form)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Arman\Documents\flask_shop_vscode\venv\Lib\site-packages\flask\templating.py", line 150, in render_template
+    return _render(app, template, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Arman\Documents\flask_shop_vscode\venv\Lib\site-packages\flask\templating.py", line 131, in _render
+    rv = template.render(context)
+         ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Arman\Documents\flask_shop_vscode\venv\Lib\site-packages\jinja2\environment.py", line 1301, in render
+    self.environment.handle_exception()
+  File "C:\Users\Arman\Documents\flask_shop_vscode\venv\Lib\site-packages\jinja2\environment.py", line 936, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "C:\Users\Arman\Documents\flask_shop_vscode\source\templates\auth\profile.html", line 1, in top-level template code
+    {% extends "base.html" %}
+  File "C:\Users\Arman\Documents\flask_shop_vscode\source\templates\base.html", line 56, in top-level template code
+    {% block content %}
+  File "C:\Users\Arman\Documents\flask_shop_vscode\source\templates\auth\profile.html", line 28, in block 'content'
+    {{ render_field(orm1.phone_number) }}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Arman\Documents\flask_shop_vscode\venv\Lib\site-packages\jinja2\environment.py", line 485, in getattr
+    return getattr(obj, attribute)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+jinja2.exceptions.UndefinedError: 'orm1' is undefined
+2024-04-02 18:46:01,866 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:72]
+2024-04-02 18:46:43,178 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:72]
+2024-04-02 18:47:43,075 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:72]
+2024-04-02 18:48:18,500 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:72]
+2024-04-02 18:48:45,538 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:72]
+2024-04-02 18:49:33,573 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:72]
+2024-04-02 18:49:57,357 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:72]
+2024-04-02 18:50:16,547 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:72]
+2024-04-02 18:51:13,352 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:72]
+2024-04-02 18:51:34,728 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:72]
+2024-04-02 18:53:20,719 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:72]
+2024-04-02 18:56:36,290 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:72]
+2024-04-02 18:58:06,031 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:72]
+2024-04-02 18:59:07,545 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:72]
+2024-04-02 19:00:14,252 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:72]
+2024-04-02 19:00:37,354 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:72]
+2024-04-02 19:01:26,322 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:72]
