@@ -50,3 +50,5 @@ AttributeError: 'datetime.datetime' object has no attribute 'srtftime'
 2024-04-01 23:17:53,995 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:72]
 2024-04-01 23:18:16,073 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:72]
 2024-04-01 23:21:47,921 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:72]
+2024-04-02 14:07:53,099 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:72]
+2024-04-02 14:18:37,405 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:72]

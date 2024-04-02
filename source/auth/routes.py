@@ -18,7 +18,11 @@ from source.email import (
 )
 import datetime
 import convertdate
-import jinja2
+
+# jinja custom filter
+@bp.add_app_template_filter
+def to_persian(dt):
+    return convertdate.persian.from_gregorian(int(dt.strftime("%Y")), int(dt.strftime("%m")), int(dt.strftime("%d")))
 
 @bp.route('/')
 def index():
@@ -110,17 +114,12 @@ def login():
                 return redirect(url_for('auth.login'))
     return render_template('auth/login.html', form=form, captcha=new_captcha_dict)
 
-# jinja custom filter
-@bp.add_app_template_filter
-def to_persian(dt):
-    return convertdate.persian.from_gregorian(int(dt.strftime("%Y")), int(dt.strftime("%m")), int(dt.strftime("%d")))
-
 @bp.route('/profile', methods=['GET', 'POST'])
 @login_required
 def profile():
     return render_template('auth/profile.html')
 
-@bp.route('/email_verification_request', methods=['GET', 'POST'])
+@bp.route('/email-verification-request', methods=['GET', 'POST'])
 @login_required
 def email_verification_request():
     form = EmailVerificationRequestForm()
@@ -128,7 +127,7 @@ def email_verification_request():
         send_email_verification_email(current_user)
     return render_template('auth/ev_request.html', form=form)
 
-@bp.route('/verify_email/<token>', methods=['GET', 'POST'])
+@bp.route('/verify-email/<token>', methods=['GET', 'POST'])
 @login_required
 def verify_email(token):
     result = None
@@ -156,7 +155,7 @@ def verify_email(token):
         return redirect(url_for('main.index'))
 
         
-@bp.route('/reset_password_request', methods=['GET', 'POST'])
+@bp.route('/reset-password-request', methods=['GET', 'POST'])
 def reset_password_request():
     if current_user.is_authenticated:
         flash("شما وارد سایت شده اید. درصورت فراموشی رمز، از سایت خارج شده و سپس  برای بازیابی اقدام کنید.")
@@ -182,7 +181,7 @@ def reset_password_request():
             return redirect(url_for('auth.index'))
     return render_template('auth/reset_password_request.html', form=form, captcha=new_captcha_dict)
 
-@bp.route('/reset_password/<token>', methods=['GET', 'POST'])
+@bp.route('/reset-password/<token>', methods=['GET', 'POST'])
 def reset_password(token):
     if current_user.is_authenticated:
         flash("لطفا خارج شوید.")

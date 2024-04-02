@@ -12,3 +12,8 @@ Implementing profile page:
 4. Upon submitting that form, we will pass that user object to email.py.
 5. email.py will use that user object to generate a token. (a method of uesr model)
 6. email.py will use its send_email function to send a email containing that token to user's email.
+7. for email to be displayed, two template files must be created in templates/email folder, containing a link with token.
+one txt and one html.
+8. Those two templates will send a request (along with the token) to verify_token route.
+9. That route will get the token from url, and uses the verify classmethod of User class to check if it is valid.
+10. If it was valid, it will simply get the user from database and change its 'is_verified' and 'verified_on' columns accordingly.
