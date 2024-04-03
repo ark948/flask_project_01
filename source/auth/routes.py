@@ -153,12 +153,14 @@ def edit_profile():
         return redirect(url_for('auth.profile'))
     user.username = request.form['username']
     user.email = request.form['email']
+    # user.phone_number = request.form['phone_number']
     try:
         if user.email != current_email:
             user.is_verified = False
             user.verified_on = None
         db.session.commit()
-        flash("تعییرات با موفقیت ثبت شد.")
+        flash("تعییرات با موفقیت ثبت شد.", 'success')
+        return redirect(url_for('auth.profile'))
     except Exception as edit_error:
         flash("خطا در فرایند ویرایش، نام کاربری یا ایمیل قبلا ثبت شده است.")
         return redirect(url_for('auth.profile'))
@@ -282,5 +284,5 @@ def reset_password(token):
 @login_required
 def logout():
     logout_user()
-    flash("کابر با موقیت خارج شد.", 'success')
+    flash("کاربر با موقیت خارج شد.", 'success')
     return redirect(url_for('main.index'))

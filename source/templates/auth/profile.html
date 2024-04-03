@@ -5,6 +5,9 @@
 <div style="padding-right: 50px; padding-top: 50px;">
     <h5>پروفایل کاربری {{ current_user.username }}</h5>
     <h5>آدرس ایمیل: {{ current_user.email }}</h5>
+    {% if current_user.phone_number %}
+        <h5>شماره تماس: {{ current_user.phone_number }}</h5>
+    {% endif %}
     <h5>ایمیل تایید شده؟
         {% if current_user.is_verified %}
         بله &#x2713
