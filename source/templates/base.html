@@ -1,23 +1,26 @@
 <!DOCTYPE html>
 <html dir="rtl" lang="fa">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>
-        {% block title %}
-        {% if title %}
-            {{ title }} - FlaskShop
-        {% else %}
-            FlaskShop
-        {% endif %}
-        {% endblock %}</title>
-        <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.rtl.min.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>
+    {% block title %}
+    {% if title %}
+    {{ title }} - FlaskShop
+    {% else %}
+    FlaskShop
+    {% endif %}
+    {% endblock %}</title>
+  <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.rtl.min.css">
 </head>
+
 <body>
   <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
       <a class="navbar-brand" href="#">FlaskShop</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -33,7 +36,8 @@
           </li>
           {% if current_user.is_authenticated %}
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="{{ url_for('auth.profile') }}">پروفایل {{ current_user.username }}</a>
+            <a class="nav-link active" aria-current="page" href="{{ url_for('auth.profile') }}">پروفایل {{
+              current_user.username }}</a>
           </li>
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="{{ url_for('auth.logout') }}">خروج</a>
@@ -46,15 +50,36 @@
       </div>
     </div>
   </nav>
-<header>
-{% block header %}
-  {% for message in get_flashed_messages() %}
-    {{ message }}
-  {% endfor %}
-{% endblock %}
-</header>
-{% block content %}
-{% endblock %}
-<script src="/static/bootstrap/js/bootstrap.min.js"></script>
+  <header>
+    {% block header %}
+    {% with messages = get_flashed_messages(with_categories=True) %}
+    {% if messages %}
+    <ul class="flashes">
+      {% for category, message in messages %}
+        {% if category == "success" %}
+          <div class="alert alert-success" role="alert">
+            <li class="{{ category }}">{{ message }}</li>
+          </div>
+        {% endif %}
+        {% if category == "error" %}
+          <div class="alert alert-danger" role="alert">
+            <li class="{{ category }}">{{ message }}</li>
+          </div>
+        {% endif %}
+        {% if category == "message" %}
+          <div class="alert alert-secondary" role="alert">
+            <li class="{{ category }}">{{ message }}</li>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </ul>
+    {% endif %}
+    {% endwith %}
+    {% endblock %}
+  </header>
+  {% block content %}
+  {% endblock %}
+  <script src="/static/bootstrap/js/bootstrap.min.js"></script>
 </body>
+
 </html>

@@ -34,7 +34,7 @@ class ProfileEditForm(FlaskForm):
     phone_number = TelField('شماره تلفن')
     submit = SubmitField('ویرایش')
 
-class PasswordChangeForm(FlaskForm):
+class ChangePasswordForm(FlaskForm):
     current = PasswordField('رمزعبور فعلی', validators=[DataRequired()])
     password = PasswordField('رمزعبور جدید', validators=[DataRequired()])
     confirm = PasswordField('تکرار رمزعبور جدید', validators=[DataRequired(), EqualTo('password')])

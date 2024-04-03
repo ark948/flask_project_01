@@ -4,7 +4,7 @@ from flask import (
 
 from source.auth import bp
 from source.auth.forms import (
-    RegisterForm, LoginForm, ResetPasswordRequestForm, ResetPasswordForm, EmailVerificationRequestForm, ProfileEditForm, PasswordChangeForm
+    RegisterForm, LoginForm, ResetPasswordRequestForm, ResetPasswordForm, EmailVerificationRequestForm, ProfileEditForm, ChangePasswordForm
 )
 
 from source import db, Captcha
@@ -116,7 +116,7 @@ def login():
                         flash("نام کاربری و یا پسورد اشتباه است.")
                         return redirect(url_for('auth.login'))
                     login_user(user, remember=form.remember_me.data)
-                    flash("با موفقیت وارد سایت شدید.")
+                    flash("با موفقیت وارد سایت شدید.", 'success')
                     return redirect(url_for('main.index'))
                 except Exception as login_error:
                     ic(login_error)
@@ -133,16 +133,16 @@ def profile():
         phone_number=current_user.phone_number
     )
     
-    password_form = PasswordChangeForm()
+    password_form = ChangePasswordForm()
 
     return render_template('auth/profile.html', form1=profile_form, form2=password_form)
 
 @bp.route('/edit-profile', methods=['POST'])
 @login_required
 def edit_profile():
-    print("[edit-profile] invoked.")
     current_username = current_user.username
     current_email = current_user.email
+    current_phone_number = current_user.phone_number
     try:
         user = User.query.get(current_user.id)
     except:
@@ -167,7 +167,31 @@ def edit_profile():
 @bp.route('/change-password', methods=['POST'])
 @login_required
 def change_password():
-    print("[change-password] invoked.")
+    try:
+        user = User.query.get(current_user.id)
+        if user.check_password(request.form['current']):
+            if request.form['password'] == request.form['confirm']:
+                try:
+                    if user.check_password(request.form['password']) and user.check_password(request.form['confirm']):
+                        flash("رمزعبور جدید نمی تواند مشابه قبلی باشد.", 'error')
+                        return redirect(url_for('auth.profile'))
+                    user.set_password(request.form['password'])
+                    db.session.commit()
+                except Exception as db_error:
+                    flash("خطا پایگاه داده، لطفا لحظاتی بعد تلاش کنید.", 'error')
+                    return redirect(url_for('auth.profile'))
+                flash("رمزعبور با موفقیت تغییر یافت.", 'success')
+                return redirect(url_for('auth.profile'))
+            else:
+                flash("رمزعبور جدید و تکرار آن یکسان نمی باشند.", 'error')
+                return redirect(url_for('auth.profile'))
+        else:
+            flash("مرزعبور فعلی صحیح نمی باشد.", 'error')
+            return redirect(url_for('auth.profile'))
+    except Exception as change_password_error:
+        flash("خطا در فرایند تغییر رمزعبور", 'error')
+        return redirect(url_for('auth.profile'))
+    return redirect(url_for('auth.profile'))
 
 @bp.route('/email-verification-request', methods=['GET', 'POST'])
 @login_required
@@ -258,5 +282,5 @@ def reset_password(token):
 @login_required
 def logout():
     logout_user()
-    flash("کابر با موقیت خارج شد.")
+    flash("کابر با موقیت خارج شد.", 'success')
     return redirect(url_for('main.index'))
