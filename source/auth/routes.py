@@ -78,13 +78,13 @@ def register():
             if Captcha.verify(c_text, c_hash):
                 result = insert_user_object(form.username.data, form.email.data, form.password.data, form.confirm.data)
                 if result == True:
-                    flash("ثبت نام با موفقیت انجام شد.")
+                    flash("ثبت نام با موفقیت انجام شد.", 'success')
                     return redirect(url_for('auth.login'))
                 elif result == False:
-                    flash("خطا در فرایند ثبت نام.")
+                    flash("خطا در فرایند ثبت نام.", 'error')
                     return redirect(url_for('auth.register'))
             else:
-                flash("کد امنیتی اشتباه وارد شده است.")
+                flash("کد امنیتی اشتباه وارد شده است.", 'error')
                 return redirect(url_for('auth.register'))
         return render_template('auth/register.html', form=form, captcha=new_captcha_dict)
 
@@ -113,15 +113,18 @@ def login():
                 try:
                     user = db.session.scalar(select(User).where(User.username==form.username.data))
                     if user is None or not user.check_password(form.password.data):
-                        flash("نام کاربری و یا پسورد اشتباه است.")
+                        flash("نام کاربری و یا پسورد اشتباه است.", 'error')
                         return redirect(url_for('auth.login'))
                     login_user(user, remember=form.remember_me.data)
                     flash("با موفقیت وارد سایت شدید.", 'success')
                     return redirect(url_for('main.index'))
                 except Exception as login_error:
                     ic(login_error)
-                    flash("خطا در فرآیند ورود.")
+                    flash("خطا در فرآیند ورود.", 'error')
                     return redirect(url_for('auth.login'))
+            else:
+                flash("کد امنیتی اشتباه وارد شده است.", 'error')
+                return redirect(url_for('auth.login'))
         return render_template('auth/login.html', form=form, captcha=new_captcha_dict)
 
 @bp.route('/profile', methods=['GET', 'POST'])
@@ -146,7 +149,7 @@ def edit_profile():
     try:
         user = User.query.get(current_user.id)
     except:
-        flash("خطا")
+        flash("خطا", 'error')
         return redirect(url_for('auth.profile'))
     if current_username == request.form['username'] and current_email == request.form['email']:
         flash("تغییری یافت نشد.")
@@ -162,7 +165,7 @@ def edit_profile():
         flash("تعییرات با موفقیت ثبت شد.", 'success')
         return redirect(url_for('auth.profile'))
     except Exception as edit_error:
-        flash("خطا در فرایند ویرایش، نام کاربری یا ایمیل قبلا ثبت شده است.")
+        flash("خطا در فرایند ویرایش، نام کاربری یا ایمیل قبلا ثبت شده است.", 'error')
         return redirect(url_for('auth.profile'))
     return redirect(url_for('auth.profile'))
 
@@ -218,7 +221,7 @@ def verify_email(token):
         ic(result)
     except Exception as tok_ver_er:
         ic(tok_ver_er)
-        flash("خطا در فرایند تایید، لطفا دوباره تلاش کنید.")
+        flash("خطا در فرایند تایید، لطفا دوباره تلاش کنید.", 'error')
         return redirect(url_for('main.index'))
     if result == True:
         try:
@@ -226,14 +229,14 @@ def verify_email(token):
             user_object.is_verified = True
             user_object.verified_on = datetime.datetime.now()
             db.session.commit()
-            flash("ایمیل شما با موفقیت تایید شد.")
+            flash("ایمیل شما با موفقیت تایید شد.", 'success')
             return redirect(url_for('main.index'))
         except Exception as user_ver_er:
             ic(user_ver_er)
-            flash('خطا در فرایند تایید')
+            flash("خطا در فرایند تایید.", 'error')
             return redirect(url_for('main.index'))
     else:
-        flash("خطا در فرایند تایید. لطفا دوباره تلاش کنید.")
+        flash("خطا در فرایند تایید. لطفا دوباره تلاش کنید.", 'error')
         return redirect(url_for('main.index'))
         
 @bp.route('/reset-password-request', methods=['GET', 'POST'])
@@ -255,17 +258,17 @@ def reset_password_request():
                 flash("یک ایمیل حاوی لینک بازیابی برای شما ارسال شد.")
                 return redirect(url_for('auth.index'))
             else:
-                flash("خطا امنیتی")
+                flash("خطا امنیتی", 'error')
                 return redirect(url_for('auth.index'))
         else:
-            flash("کد امنیتی اشتباه وارد شده است.")
+            flash("کد امنیتی اشتباه وارد شده است.", 'error')
             return redirect(url_for('auth.index'))
     return render_template('auth/reset_password_request.html', form=form, captcha=new_captcha_dict)
 
 @bp.route('/reset-password/<token>', methods=['GET', 'POST'])
 def reset_password(token):
     if current_user.is_authenticated:
-        flash("لطفا خارج شوید.")
+        flash("لطفا خارج شوید.", 'error')
         return redirect(url_for('auth.index'))
     user = User.verify_reset_password_token(token)
     if not user:
@@ -276,7 +279,7 @@ def reset_password(token):
     if form.validate_on_submit():
         user.set_password(form.password.data)
         db.session.commit()
-        flash('رمزعبور شما با موفقیت تغییر کرد.')
+        flash("رمز عبور شما با موفقیت تغییر کرد.", 'success')
         return redirect(url_for('auth.index'))
     return render_template('auth/reset_password.html', form=form)
 
