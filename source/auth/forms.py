@@ -5,7 +5,9 @@ from wtforms.validators import DataRequired, EqualTo
 class RegisterForm(FlaskForm):
     username = StringField('نام کاربری', validators=[DataRequired()])
     email = EmailField('آدرس ایمیل', validators=[DataRequired()])
-    password = PasswordField('رمزعبور', validators=[DataRequired(), EqualTo('confirm')])
+    password = PasswordField('رمزعبور', validators=[
+        DataRequired(), 
+        EqualTo('confirm', message='رمزعبور با تکرار آن همخوانی ندارد.')])
     confirm = PasswordField('تکرار رمزعبور', validators=[DataRequired()])
     submit = SubmitField('ثبت نام')
 

@@ -3,6 +3,7 @@ from flask import current_app
 from source import create_app, db
 from icecream import ic
 from config import TestConfig
+from source.models.user import User
 
 class TestWebApp(unittest.TestCase):
     def setUp(self):
@@ -11,6 +12,7 @@ class TestWebApp(unittest.TestCase):
         self.appctx = self.app.app_context()
         self.appctx.push()
         db.create_all()
+        self.populate_db()
         self.client = self.app.test_client()
 
     def tearDown(self):
@@ -19,6 +21,18 @@ class TestWebApp(unittest.TestCase):
         self.app = None
         self.appctx = None
         self.client = None
+
+    def populate_db(self):
+        user = User(username='susan', email='susan@example.com')
+        user.set_password('foo')
+        db.session.add(user)
+        db.session.commit()
+
+    def login(self):
+        self.client.post('/auth/login', data={
+            'username': 'susan',
+            'password': 'foo',
+        })
 
     def test_app(self):
         assert self.app is not None
@@ -57,7 +71,6 @@ class TestWebApp(unittest.TestCase):
             'password': 'foo',
             'confirm': 'foo',
         })
-        
         assert response.status_code == 200
 
         response = self.client.post('/auth/register', data={
@@ -65,6 +78,18 @@ class TestWebApp(unittest.TestCase):
             'password': 'foo',
             'remember_me': False
         })
-
         assert response.status_code == 200
+
+    def test_register_user_mismatched_passwords(self):
+        response = self.client.post('/auth/register', data={
+            'username': 'alice',
+            'email': 'alice@example.com',
+            'password': 'foo',
+            'confirm': 'bar',
+        })
+        assert response.status_code == 200
+        html = response.get_data(as_text=True)
+        assert 'رمزعبور با تکرار آن همخوانی ندارد.' in html
+
+    
     
