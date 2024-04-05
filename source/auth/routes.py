@@ -12,7 +12,6 @@ from flask_login import (
     login_user, logout_user, current_user, login_required
 )
 
-from source.models.user import User
 from sqlalchemy import (
     select
 )
@@ -21,15 +20,19 @@ from source.email import (
     send_password_reset_email, send_email_verification_email
 )
 
-import datetime, convertdate
+from source.auth.utils import (
+    insert_user_object
+)
+
+from source.models.user import User
 
 from icecream import ic
 ic.configureOutput(includeContext=True)
 
+import datetime
+
 # jinja custom filter
-@bp.add_app_template_filter
-def to_persian(dt):
-    return convertdate.persian.from_gregorian(int(dt.strftime("%Y")), int(dt.strftime("%m")), int(dt.strftime("%d")))
+# from source.auth.utils import to_persian
 
 @bp.route('/')
 def index():
@@ -38,26 +41,8 @@ def index():
         return redirect(url_for('main.index'))
     return render_template('auth/index.html')
 
-def insert_user_object(username, email, password, confirm):
-    try:
-        new_user_object = User(username, email)
-    except Exception as user_creation_error:
-        ic(user_creation_error)
-        return False
-    if password == confirm:
-        try:
-            new_user_object.set_password(password)
-            db.session.add(new_user_object)
-            db.session.commit()
-            return True
-        except Exception as user_insertion_error:
-            ic(user_insertion_error)
-            return False
-    else:
-        return False
-
-# no link to this route
-# old register route deleted (no support for testing - captcha)
+# user insertion function moved to utils.py
+# username availability check (ajax) moved to utils.py
 
 @bp.route('/register', methods=['GET', 'POST'])
 def register():
@@ -88,7 +73,6 @@ def register():
                 return redirect(url_for('auth.register'))
         return render_template('auth/register.html', form=form, captcha=new_captcha_dict)
 
-# old login route removed (no support for testing - captcha)
 
 @bp.route('/login', methods=['GET', 'POST'])
 def login():
@@ -137,7 +121,6 @@ def profile():
     )
     
     password_form = ChangePasswordForm()
-
     return render_template('auth/profile.html', form1=profile_form, form2=password_form)
 
 @bp.route('/edit-profile', methods=['POST'])
@@ -145,7 +128,7 @@ def profile():
 def edit_profile():
     current_username = current_user.username
     current_email = current_user.email
-    current_phone_number = current_user.phone_number
+    # current_phone_number = current_user.phone_number
     try:
         user = User.query.get(current_user.id)
     except:

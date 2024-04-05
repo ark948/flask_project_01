@@ -1,8 +1,8 @@
 from source import create_app, db
+from source.auth.utils import check_username_availability
 import sqlalchemy as sa
 import sqlalchemy.orm as so
 from source.models.user import User
-import os
 
 app = create_app()
 
@@ -13,6 +13,7 @@ def make_shell_context():
         'so': so,
         'db': db,
         'User': User,
+        'chu': check_username_availability,
     }
 
 if __name__ == "__main__":
