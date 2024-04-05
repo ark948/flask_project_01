@@ -630,3 +630,4 @@ werkzeug.routing.exceptions.BuildError: Could not build url for endpoint 'admin.
 2024-04-05 22:54:33,627 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:75]
 2024-04-05 22:55:58,808 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:75]
 2024-04-05 22:57:56,522 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:75]
+2024-04-05 23:05:02,258 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:75]
