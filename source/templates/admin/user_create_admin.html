@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h4 style="padding-right: 50px; padding-top: 50px;">
+    افزودن کاربر جدید
+</h4>
+
+{% from "macros/_formhelpers.html" import render_field %}
+
+<div style="padding-top: 50px; padding-right: 50px;">
+    <form action="{{ url_for('admin.user_create_admin') }}" method="post">
+        {{ form.csrf_token }}
+        {{ render_field(form.username) }}
+        {{ render_field(form.email) }}
+        {{ render_field(form.pwdhash) }}
+        {{ render_field(form.admin) }}
+        {{ render_field(form.submit) }}
+    </form>
+</div>
+
+{% endblock %}

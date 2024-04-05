@@ -16,6 +16,7 @@ class User(UserMixin, db.Model):
     phone_number = db.Column(db.String(50))
     is_verified = db.Column(db.Boolean, nullable=True, default=False)
     verified_on = db.Column(db.DateTime, nullable=True)
+    admin = db.Column(db.Boolean(), default=False)
 
     def __init__(self, username, email):
         self.username = username
@@ -32,6 +33,9 @@ class User(UserMixin, db.Model):
             {'reset_password': self.id, 'exp': time() + expires_in},
             current_app.config['SECRET_KEY'], algorithm='HS256'
         )
+    
+    def is_admin(self):
+        return self.admin
     
     @staticmethod
     def verify_reset_password_token(token):

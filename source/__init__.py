@@ -37,6 +37,9 @@ def create_app(config_class=Config):
     from source.auth import bp as auth_bp
     app.register_blueprint(auth_bp, url_prefix='/auth')
 
+    from source.admin import bp as admin_bp
+    app.register_blueprint(admin_bp, url_prefix='/admin')
+
     from source.shop import bp as shop_bp
     app.register_blueprint(shop_bp, url_prefix='/shop')
 

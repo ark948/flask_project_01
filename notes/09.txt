@@ -3,3 +3,28 @@ trying to fix routes, change underscore to dash in auth
 Patterns to consider: keep test routes to minimal, no redirect, no flash message
 
 Changed log file backup to 0, Adds 'Roff' to repo languages
+
+1. Admin blueprint - Admin panel:
+features to implement:
+custom model for admins
+custom views for admins
+custom model views for admins
+custom login_required decorator for admins
+custom forms for admins
+
+Now where to start? A new model or initializing the flask-admin package?
+
+We can choose to either extend the current user model to have an is_admin field, or implement separate admin model.
+I will make a separate model for admins.
+Problem: if to make a separate model for admins, the user loader function from flask-login will have issues.
+There is also the base class 'Person' approach than user and admin model can derive from later.
+
+For now, i'll just go along with the flask cookbook and use already defined user model.
+
+Added admin boolean field and is_admin method to user model. A database migration is required.
+Forgot to add default field. should i delete the migration file or just go with it. I'm deleting it. Better to be specific about everything.
+
+apparently the flask cookbook is implementing admin panel without the flask-admin extention, at first try.
+
+VERY IMPORTANT:
+the reason that no error would be showed if csrf_token was missing, is that 'if form.errors' was not added to the end of route. From now on this will be a permanent pattern for me.
