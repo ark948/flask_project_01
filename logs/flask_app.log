@@ -1331,3 +1331,84 @@ AttributeError: 'AnonymousUserMixin' object has no attribute 'is_admin'
 2024-04-07 15:56:29,201 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:75]
 2024-04-07 15:56:50,797 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:75]
 2024-04-07 15:57:52,495 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:75]
+2024-04-07 16:00:56,948 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:75]
+2024-04-07 16:00:57,653 ERROR: Exception on / [GET] [in C:\Users\Arman\Documents\flask_shop_vscode\venv\Lib\site-packages\flask\app.py:828]
+Traceback (most recent call last):
+  File "C:\Users\Arman\Documents\flask_shop_vscode\venv\Lib\site-packages\flask\app.py", line 1463, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Arman\Documents\flask_shop_vscode\venv\Lib\site-packages\flask\app.py", line 872, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Arman\Documents\flask_shop_vscode\venv\Lib\site-packages\flask\app.py", line 870, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Arman\Documents\flask_shop_vscode\venv\Lib\site-packages\flask\app.py", line 855, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Arman\Documents\flask_shop_vscode\venv\Lib\site-packages\flask\views.py", line 110, in view
+    return current_app.ensure_sync(self.dispatch_request)(**kwargs)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Arman\Documents\flask_shop_vscode\source\main\routes.py", line 18, in dispatch_request
+    return render_template('main/index.html')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Arman\Documents\flask_shop_vscode\venv\Lib\site-packages\flask\templating.py", line 150, in render_template
+    return _render(app, template, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Arman\Documents\flask_shop_vscode\venv\Lib\site-packages\flask\templating.py", line 131, in _render
+    rv = template.render(context)
+         ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Arman\Documents\flask_shop_vscode\venv\Lib\site-packages\jinja2\environment.py", line 1301, in render
+    self.environment.handle_exception()
+  File "C:\Users\Arman\Documents\flask_shop_vscode\venv\Lib\site-packages\jinja2\environment.py", line 936, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "C:\Users\Arman\Documents\flask_shop_vscode\source\templates\main\index.html", line 1, in top-level template code
+    {% extends "base.html" %}
+  File "C:\Users\Arman\Documents\flask_shop_vscode\source\templates\base.html", line 82, in top-level template code
+    {% block content %}
+  File "C:\Users\Arman\Documents\flask_shop_vscode\source\templates\main\index.html", line 7, in block 'content'
+    {% if current_user|is_admin_filter %}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+jinja2.exceptions.TemplateRuntimeError: No filter named 'is_admin_filter' found.
+2024-04-07 16:01:07,286 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:75]
+2024-04-07 16:01:08,884 ERROR: Exception on / [GET] [in C:\Users\Arman\Documents\flask_shop_vscode\venv\Lib\site-packages\flask\app.py:828]
+Traceback (most recent call last):
+  File "C:\Users\Arman\Documents\flask_shop_vscode\venv\Lib\site-packages\flask\app.py", line 1463, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Arman\Documents\flask_shop_vscode\venv\Lib\site-packages\flask\app.py", line 872, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Arman\Documents\flask_shop_vscode\venv\Lib\site-packages\flask\app.py", line 870, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Arman\Documents\flask_shop_vscode\venv\Lib\site-packages\flask\app.py", line 855, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Arman\Documents\flask_shop_vscode\venv\Lib\site-packages\flask\views.py", line 110, in view
+    return current_app.ensure_sync(self.dispatch_request)(**kwargs)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Arman\Documents\flask_shop_vscode\source\main\routes.py", line 18, in dispatch_request
+    return render_template('main/index.html')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Arman\Documents\flask_shop_vscode\venv\Lib\site-packages\flask\templating.py", line 150, in render_template
+    return _render(app, template, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Arman\Documents\flask_shop_vscode\venv\Lib\site-packages\flask\templating.py", line 131, in _render
+    rv = template.render(context)
+         ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Arman\Documents\flask_shop_vscode\venv\Lib\site-packages\jinja2\environment.py", line 1301, in render
+    self.environment.handle_exception()
+  File "C:\Users\Arman\Documents\flask_shop_vscode\venv\Lib\site-packages\jinja2\environment.py", line 936, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "C:\Users\Arman\Documents\flask_shop_vscode\source\templates\main\index.html", line 1, in top-level template code
+    {% extends "base.html" %}
+  File "C:\Users\Arman\Documents\flask_shop_vscode\source\templates\base.html", line 82, in top-level template code
+    {% block content %}
+  File "C:\Users\Arman\Documents\flask_shop_vscode\source\templates\main\index.html", line 7, in block 'content'
+    {% if current_user|is_admin_filter %}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+jinja2.exceptions.TemplateRuntimeError: No filter named 'is_admin_filter' found.
+2024-04-07 16:01:18,112 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:75]
+2024-04-07 16:01:58,901 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:75]
+2024-04-07 18:23:04,857 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:75]

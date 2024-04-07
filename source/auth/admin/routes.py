@@ -19,7 +19,7 @@ from source.auth.admin.forms import (
 )
 
 from source.auth.admin.utils import (
-    admin_login_required
+    admin_login_required, insert_user_admin
 )
 
 from icecream import ic
@@ -54,21 +54,17 @@ def user_create_admin():
             flash("نام کاربری قبلا ثبت شده است.", 'danger') # to be changed to warning later
             return redirect(url_for('auth.admin.user_create_admin'))
         try:
-            user = User(username, email)
-            user.set_password(password)
-            user.admin = admin
-            try:
-                db.session.add(user)
-                db.session.commit()
-            except Exception as db_error:
-                flash("خطا پایگاه داده.", 'danger')
-                db.session.rollback()
+            response = insert_user_admin(username, email, password, admin)
+            if response['result'] == True:
+                flash('کاربر با موفقیت افزورده شد.', 'success')
                 return redirect(url_for('auth.admin.user_create_admin'))
-            flash("کاربر جدید ثبت شد.", 'success')
-            return redirect(url_for('auth.admin.users_list_admin'))
-        except Exception as new_user_by_admin_error:
-            ic(new_user_by_admin_error)
-            flash("خطا در فرایند افزودن", 'danger')
+            else:
+                flash("خطا در فرایند افزودن.", 'danger')
+                ic(response['message'])
+                return redirect(url_for('auth.admin.user_create_admin'))
+        except Exception as new_user_admin_error:
+            ic(new_user_admin_error)
+            flash("خطا در فرایند افزودن کاربر جدید.", 'danger')
             return redirect(url_for('auth.admin.user_create_admin'))
     
     if form.errors:
