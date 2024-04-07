@@ -10,5 +10,5 @@ def is_username_available(username: str) -> bool:
             return False
         else:
             return True
-    except Exception as error:
+    except:
         return False

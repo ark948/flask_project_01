@@ -9,7 +9,7 @@
 {% from "macros/_formhelpers.html" import render_field %}
 
 <div style="padding-top: 50px; padding-right: 50px;">
-    <form action="{{ url_for('admin.user_create_admin') }}" method="post">
+    <form action="{{ url_for('auth.admin.user_create_admin') }}" method="post">
         {{ form.csrf_token }}
         {{ render_field(form.username) }}
         {{ render_field(form.email) }}
@@ -18,5 +18,9 @@
         {{ render_field(form.submit) }}
     </form>
 </div>
+
+<p style="padding-right: 50px; padding-top: 50px;">
+    <a href="{{ url_for('auth.admin.users_list_admin') }}">بازکشت به لیست</a>
+</p>
 
 {% endblock %}

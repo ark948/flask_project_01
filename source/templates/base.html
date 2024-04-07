@@ -47,9 +47,6 @@
             <a class="nav-link active" aria-current="page" href="{{ url_for('auth.index') }}">ناحیه کاربری</a>
           </li>
           {% endif %}
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="{{ url_for('admin.index') }}">پنل ادمین</a>
-          </li>
       </div>
     </div>
   </nav>
@@ -63,15 +60,17 @@
           <div class="alert alert-success" role="alert">
             {{ message }}
           </div>
-        {% endif %}
-        {% if category == "error" %}
+        {% elif category == "error" %}
           <div class="alert alert-danger" role="alert">
             {{ message }}
           </div>
-        {% endif %}
-        {% if category == "message" %}
+        {% elif category == "message" %}
           <div class="alert alert-secondary" role="alert">
             {{ messages }}
+          </div>
+        {% else %}
+          <div class="alert alert-warning" role="alert">
+            {{ message }}
           </div>
         {% endif %}
       {% endfor %}

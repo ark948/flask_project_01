@@ -1,22 +1,24 @@
 from source import db
 
-from source.admin import bp
+from source.auth.admin import bp
 
-from flask_login import login_required
+from flask_login import (
+    login_required, current_user
+)
 
 from source.models.user import (
     User
 )
 
 from flask import (
-    abort, render_template, flash, redirect, url_for
+    render_template, flash, redirect, url_for
 )
 
-from source.admin.forms import (
+from source.auth.admin.forms import (
     AdminUserCreateForm, AdminUserUpdateForm
 )
 
-from source.admin.utils import (
+from source.auth.admin.utils import (
     admin_login_required
 )
 
@@ -27,14 +29,14 @@ ic.configureOutput(includeContext=True)
 @login_required
 @admin_login_required
 def index():
-    return render_template('admin/index.html')
+    return render_template('auth/admin/index.html')
 
 @bp.route('/users-list')
 @login_required
 @admin_login_required
 def users_list_admin():
     users = User.query.all()
-    return render_template('admin/users_list_admin.html', users=users)
+    return render_template('auth/admin/users_list_admin.html', users=users)
 
 @bp.route('/create-user', methods=['GET', 'POST'])
 @login_required
@@ -50,26 +52,31 @@ def user_create_admin():
         existing_username = User.query.filter_by(username=username).first()
         if existing_username:
             flash("نام کاربری قبلا ثبت شده است.", 'danger') # to be changed to warning later
-            return redirect(url_for('admin.user_create_admin'))
+            return redirect(url_for('auth.admin.user_create_admin'))
         try:
             user = User(username, email)
             user.set_password(password)
             user.admin = admin
-            db.session.add(user)
-            db.session.commit()
+            try:
+                db.session.add(user)
+                db.session.commit()
+            except Exception as db_error:
+                flash("خطا پایگاه داده.", 'danger')
+                db.session.rollback()
+                return redirect(url_for('auth.admin.user_create_admin'))
             flash("کاربر جدید ثبت شد.", 'success')
-            return redirect(url_for('admin.users_list_admin'))
+            return redirect(url_for('auth.admin.users_list_admin'))
         except Exception as new_user_by_admin_error:
             ic(new_user_by_admin_error)
             flash("خطا در فرایند افزودن", 'danger')
-            return redirect(url_for('admin.user_create_admin'))
+            return redirect(url_for('auth.admin.user_create_admin'))
     
     if form.errors:
         ic(form.errors)
         flash("خطا در فرم", 'danger')
-        return redirect(url_for('admin.user_create_admin.'))
+        return redirect(url_for('auth.admin.user_create_admin.'))
         # flash(form.errors, 'danger')
-    return render_template('admin/user_create_admin.html', form=form)
+    return render_template('auth/admin/user_create_admin.html', form=form)
 
 @bp.route('/update-user/<id>', methods=['GET', 'POST'])
 @login_required
@@ -96,23 +103,23 @@ def user_update_admin(id):
         except Exception as update_error_by_query:
             ic(update_error_by_query)
             flash("خطا در فرایند ویرایش", 'danger')
-            return redirect(url_for('admin.users_list_admin'))
+            return redirect(url_for('auth.admin.users_list_admin'))
         
         try:
             db.session.commit()
             flash("بروزرسانی کاربر با موفقیت انجام شد.", 'success')
-            return redirect(url_for('admin.users_list_admin'))
+            return redirect(url_for('auth.admin.users_list_admin'))
         except Exception as update_commit_error:
             ic(update_commit_error)
             flash("خطا در ثبت ویرایش.", 'danger')
-            return redirect(url_for('admin.users_list_admin'))
+            return redirect(url_for('auth.admin.users_list_admin'))
     if form.errors:
         ic(form.errors)
         # flash(form.errors, 'danger')
         flash("خطا در فرم", 'danger')
-        return redirect(url_for('admin.users_list_admin'))
+        return redirect(url_for('auth.admin.users_list_admin'))
 
-    return render_template('admin/user_update_admin.html', form=form, user=user)
+    return render_template('auth/admin/user_update_admin.html', form=form, user=user)
 
 @bp.route('/delete-user/<id>', methods=['POST'])
 @login_required
@@ -123,8 +130,8 @@ def user_delete_admin(id):
         db.session.delete(user)
         db.session.commit()
         flash("کاربر با موفقیت حذف شد.", 'success')
-        return redirect(url_for('admin.users_list_admin'))
+        return redirect(url_for('auth.admin.users_list_admin'))
     except Exception as user_delete_error:
         ic(user_delete_error)
         flash("خطا در فرایند حذف", 'danger')
-        return redirect(url_for('admin.users_list_admin'))
+        return redirect(url_for('auth.admin.users_list_admin'))

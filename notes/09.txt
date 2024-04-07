@@ -28,3 +28,28 @@ apparently the flask cookbook is implementing admin panel without the flask-admi
 
 VERY IMPORTANT:
 the reason that no error would be showed if csrf_token was missing, is that 'if form.errors' was not added to the end of route. From now on this will be a permanent pattern for me.
+
+Trying to convert index routes to class-based views.
+Generally, there are two classes to inherit from, when using class-based views, View and MethodView
+class-based views needs to be registered after creation.
+
+main index view converted to class.
+
+I don't think class-based views are very useful, they add extra complexity.
+Best saved for apis.
+
+Adding flask-admin to init...
+Big problem, having a blueprint named 'admin' and the instance of the flask_admin being named 'admin' is causing problems.
+This does not make any sense anymore. Having a admin blueprint and using this extension. Too much work and messy code.
+One possible solution: Nested blueprints. One 'admin' blueprint as the main. and two sub-blueprints.
+One for manual admin section and one for extension which we'll call automatic.
+
+Still throws error, having a blueprint named admin and an extension named admin, causes conflict.
+had to change the admin blueprint to main_admin just so flask_admin can be initialized.
+
+I was able to make sure that both admin blueprints work fine. However, another problem has been raised.
+Maybe if i changed the my own admin template folder name... Did not work. Now flask_admin is taking over completely.
+This doesn't work. even tried to changed the name. changed everything.
+
+This is no longer practical. I will move my own admin panel to auth as a child blueprint.
+and add a admin.py file for flask-admin.
