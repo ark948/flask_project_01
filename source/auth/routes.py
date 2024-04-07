@@ -53,6 +53,7 @@ def register():
         form = RegisterForm()
         if form.validate_on_submit():
             result = insert_user_object(form.username.data, form.email.data, form.password.data, form.confirm.data)
+            return redirect(url_for('auth.login'))
         return render_template('auth/register.html', form=form)
     elif current_app.config['TESTING'] == False or current_app.config['TESTING'] == None:
         form = RegisterForm()
@@ -86,6 +87,7 @@ def login():
             if user is None or not user.check_password(form.password.data):
                 redirect(url_for('auth.login'))
             login_user(user, remember=form.remember_me.data)
+            return redirect(url_for('main.index'))
         return render_template('auth/login.html', form=form)
     elif current_app.config['TESTING'] == False or current_app.config['TESTING'] == None:
         new_captcha_dict = Captcha.create()

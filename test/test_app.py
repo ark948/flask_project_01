@@ -5,6 +5,8 @@ from icecream import ic
 from config import TestConfig
 from source.models.user import User
 
+ic.configureOutput(includeContext=True)
+
 class TestWebApp(unittest.TestCase):
     def setUp(self):
         self.app = create_app(TestConfig)
@@ -27,12 +29,6 @@ class TestWebApp(unittest.TestCase):
         user.set_password('foo')
         db.session.add(user)
         db.session.commit()
-
-    def login(self):
-        self.client.post('/auth/login', data={
-            'username': 'susan',
-            'password': 'foo',
-        })
 
     def test_app(self):
         assert self.app is not None
@@ -70,15 +66,17 @@ class TestWebApp(unittest.TestCase):
             'email': 'alice@example.com',
             'password': 'foo',
             'confirm': 'foo',
-        })
+        }, follow_redirects=True)
         assert response.status_code == 200
+        assert response.request.path == '/auth/login'
 
-        response = self.client.post('/auth/register', data={
+        response = self.client.post('/auth/login', data={
             'username': 'alice',
             'password': 'foo',
             'remember_me': False
-        })
+        }, follow_redirects=True)
         assert response.status_code == 200
+        assert response.request.path == '/'
 
     def test_register_user_mismatched_passwords(self):
         response = self.client.post('/auth/register', data={
@@ -91,5 +89,20 @@ class TestWebApp(unittest.TestCase):
         html = response.get_data(as_text=True)
         assert 'رمزعبور با تکرار آن همخوانی ندارد.' in html
 
-    
+    def test_login_with_permanent_user(self):
+        response = self.client.post('/auth/login', data={
+            'username': 'susan',
+            'password': 'foo',
+        }, follow_redirects=True)
+
+        assert response.status_code == 200
+        assert response.request.path == '/'
+        print("\n[Login was executed.]")
+
+    def login(self):
+        # this auxiliary method will not be executed
+        self.client.post('/auth/register', data={
+            'username': 'susan',
+            'password': 'foo',
+        })
     
