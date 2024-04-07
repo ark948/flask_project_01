@@ -8,18 +8,18 @@
     <h6>تعداد صفحات: {{ users.pages }}</h6>
     <h6>صفحه کنونی: {{ users.page }}</h6>
     {% for user in users.items %}
-        <p>
+        <ul>
             {{ (users.page - 1)*users.per_page + loop.index }}
             نام کاربری: {{ user.username }}
             آدرس ایمیل: {{ user.email }}
             دسترسی ادمین {{ user.amdin }}
             ایمیل تایید شده: {{ user.is_verified }}
             <a href="{{ url_for('auth.admin.user_update_admin', id=user.id) }}">ویرایش</a>
-            <form action="{{ url_for('auth.admin.user_delete_admin', id=user.id) }}" method="post"
+            <form style="display: inline;" action="{{ url_for('auth.admin.user_delete_admin', id=user.id) }}" method="post"
             onclick="return confirm('آیا از حذف این کاربر اطمینان دارید؟')">
                 <input type="submit" value="حذف">
             </form> 
-        </p>
+        </ul>
     {% endfor %}
     <br>
     <div class="pagination">
