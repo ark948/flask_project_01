@@ -4,9 +4,7 @@
 
 <h2 style="padding-right: 50px; padding-top: 25px;">صفحه اصلی</h2>
 
-<!-- {{ current_user|is_admin }} -->
-
-{% if current_user.is_authenticated %}
+{% if current_user|is_admin_filter %}
     <p style="padding-right: 50px;"><a href="{{ url_for('auth.admin.index') }}">کاربر ادمین</a></p>
     <p style="padding-right: 50px;"><a href="{{ url_for('main.er') }}">raise Exception</a></p>
 {% endif %}
