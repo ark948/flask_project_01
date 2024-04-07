@@ -10,6 +10,7 @@ class Config:
     SECRET_KEY = os.environ.get('SECRET_KEY') or 'some-random-secure-string-to-be-generated-later'
     SQLALCHEMY_DATABASE_URI = "postgresql+psycopg2://postgres:1234@localhost:5432/flask_db"
     SQLALCHEMY_TRACK_MODIFICATIONS = False
+    PAGINATION_PER_PAGE_ADMIN = 10
 
     # Email server
     MAIL_SERVER = 'localhost'

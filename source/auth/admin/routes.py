@@ -11,7 +11,7 @@ from source.models.user import (
 )
 
 from flask import (
-    render_template, flash, redirect, url_for
+    render_template, flash, redirect, url_for, request, current_app
 )
 
 from source.auth.admin.forms import (
@@ -35,7 +35,15 @@ def index():
 @login_required
 @admin_login_required
 def users_list_admin():
-    users = User.query.all()
+    page = request.args.get('page', 1, type=int)
+    try:
+        users = User.query.paginate(page=page, per_page=current_app.config['PAGINATION_PER_PAGE_ADMIN'])
+        if users.total == 0:
+            flash("لیست کاربران خالی می باشد.", 'message')
+    except Exception as users_pagination_error:
+        ic(users_pagination_error)
+        flash("خطا در دریافت لیست کاربران.", 'danger')
+        return redirect(url_for('auth.admin.index'))
     return render_template('auth/admin/users_list_admin.html', users=users)
 
 @bp.route('/create-user', methods=['GET', 'POST'])

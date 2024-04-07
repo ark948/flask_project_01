@@ -15,7 +15,7 @@ def admin_login_required(func):
         return func(*args, **kwargs)
     return decorated_view
 
-def insert_user_admin(username, email, password, admin=False):
+def insert_user_admin(username: str, email: str, password: str, admin: bool = False) -> dict:
     response = {}
     try:
         user = User(username, email)
