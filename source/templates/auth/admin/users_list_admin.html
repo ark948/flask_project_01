@@ -7,34 +7,44 @@
     <h4>تعداد کل کاربران: {{ users.total }}</h4>
     <h6>تعداد صفحات: {{ users.pages }}</h6>
     <h6>صفحه کنونی: {{ users.page }}</h6>
-    {% for user in users.items %}
-        <ul>
-            {{ (users.page - 1)*users.per_page + loop.index }}
-            نام کاربری: {{ user.username }}
-            آدرس ایمیل: {{ user.email }}
-            دسترسی ادمین {{ user.amdin }}
-            ایمیل تایید شده: {{ user.is_verified }}
-            <a href="{{ url_for('auth.admin.user_update_admin', id=user.id) }}">ویرایش</a>
-            <form style="display: inline;" action="{{ url_for('auth.admin.user_delete_admin', id=user.id) }}" method="post"
-            onclick="return confirm('آیا از حذف این کاربر اطمینان دارید؟')">
-                <input type="submit" value="حذف">
-            </form> 
-        </ul>
-    {% endfor %}
+    <table class="table table-sm">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">نام کاربری</th>
+                <th scope="col">آدرس ایمیل</th>
+                <th scope="col">دسترسی ادمین</th>
+                <th scope="col">ایمیل تایید شده؟</th>
+                <th scope="col">شناسه پایگاه داده</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in users.items %}
+            <tr>
+                <td>{{ (users.page - 1)*users.per_page + loop.index }}</td>
+                <td>{{ user.username }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.admin }}</td>
+                <td>{{ user.is_verified }}</td>
+                <td>{{ user.id }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
     <br>
     <div class="pagination">
         {% if users.has_prev %}
-            <a href="{{ url_for('auth.admin.users_list_admin', page=users.prev_num) }}">{{ 'قبل' }}</a>
+        <a href="{{ url_for('auth.admin.users_list_admin', page=users.prev_num) }}">{{ 'قبل' }}</a>
         {% endif %}
         {% for number in users.iter_pages() %}
-            {% if users.page != number %}
-            <a href="{{ url_for('auth.admin.users_list_admin', page=number) }}">&nbsp&nbsp{{ number }}&nbsp&nbsp</a>
-            {% else %}
-            &nbsp&nbsp{{ number }}&nbsp&nbsp
-            {% endif %}
+        {% if users.page != number %}
+        <a href="{{ url_for('auth.admin.users_list_admin', page=number) }}">&nbsp&nbsp{{ number }}&nbsp&nbsp</a>
+        {% else %}
+        &nbsp&nbsp{{ number }}&nbsp&nbsp
+        {% endif %}
         {% endfor %}
         {% if users.has_next %}
-            <a href="{{ url_for('auth.admin.users_list_admin', page=users.next_num) }}">{{ 'بعد' }}</a>
+        <a href="{{ url_for('auth.admin.users_list_admin', page=users.next_num) }}">{{ 'بعد' }}</a>
         {% endif %}
     </div>
 </div>

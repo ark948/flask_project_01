@@ -37,7 +37,7 @@ def index():
 def users_list_admin():
     page = request.args.get('page', 1, type=int)
     try:
-        users = User.query.paginate(page=page, per_page=current_app.config['PAGINATION_PER_PAGE_ADMIN'])
+        users = User.query.order_by(User.id).paginate(page=page, per_page=current_app.config['PAGINATION_PER_PAGE_ADMIN'])
         if users.total == 0:
             flash("لیست کاربران خالی می باشد.", 'message')
     except Exception as users_pagination_error:
