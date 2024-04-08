@@ -2019,3 +2019,97 @@ jinja2.exceptions.TemplateRuntimeError: No filter named 'is_admin_filter' found.
 2024-04-07 23:17:22,965 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:75]
 2024-04-07 23:18:34,338 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:75]
 2024-04-07 23:20:06,288 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:75]
+2024-04-08 14:32:13,305 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:75]
+2024-04-08 14:37:16,164 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:75]
+2024-04-08 14:40:22,024 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:75]
+2024-04-08 14:40:22,641 ERROR: Exception on /auth/admin/users-list [GET] [in C:\Users\Arman\Documents\flask_shop_vscode\venv\Lib\site-packages\flask\app.py:828]
+Traceback (most recent call last):
+  File "C:\Users\Arman\Documents\flask_shop_vscode\venv\Lib\site-packages\flask\app.py", line 1463, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Arman\Documents\flask_shop_vscode\venv\Lib\site-packages\flask\app.py", line 872, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Arman\Documents\flask_shop_vscode\venv\Lib\site-packages\flask\app.py", line 870, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Arman\Documents\flask_shop_vscode\venv\Lib\site-packages\flask\app.py", line 855, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Arman\Documents\flask_shop_vscode\venv\Lib\site-packages\flask_login\utils.py", line 290, in decorated_view
+    return current_app.ensure_sync(func)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Arman\Documents\flask_shop_vscode\source\auth\admin\utils.py", line 15, in decorated_view
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Arman\Documents\flask_shop_vscode\source\auth\admin\routes.py", line 47, in users_list_admin
+    return render_template('auth/admin/users_list_admin.html', users=users)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Arman\Documents\flask_shop_vscode\venv\Lib\site-packages\flask\templating.py", line 150, in render_template
+    return _render(app, template, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Arman\Documents\flask_shop_vscode\venv\Lib\site-packages\flask\templating.py", line 131, in _render
+    rv = template.render(context)
+         ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Arman\Documents\flask_shop_vscode\venv\Lib\site-packages\jinja2\environment.py", line 1301, in render
+    self.environment.handle_exception()
+  File "C:\Users\Arman\Documents\flask_shop_vscode\venv\Lib\site-packages\jinja2\environment.py", line 936, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "C:\Users\Arman\Documents\flask_shop_vscode\source\templates\auth\admin\users_list_admin.html", line 1, in top-level template code
+    {% extends "base.html" %}
+  File "C:\Users\Arman\Documents\flask_shop_vscode\source\templates\base.html", line 82, in top-level template code
+    {% block content %}
+  File "C:\Users\Arman\Documents\flask_shop_vscode\source\templates\auth\admin\users_list_admin.html", line 30, in block 'content'
+    <td>{{ user.verified_on|to_persian }}</td>
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Arman\Documents\flask_shop_vscode\source\auth\utils.py", line 11, in to_persian
+    return persian.from_gregorian(int(dt.strftime("%Y")), int(dt.strftime("%m")), int(dt.strftime("%d")))
+                                      ^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'strftime'
+2024-04-08 14:40:58,360 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:75]
+2024-04-08 14:41:02,079 ERROR: Exception on /auth/admin/users-list [GET] [in C:\Users\Arman\Documents\flask_shop_vscode\venv\Lib\site-packages\flask\app.py:828]
+Traceback (most recent call last):
+  File "C:\Users\Arman\Documents\flask_shop_vscode\venv\Lib\site-packages\flask\app.py", line 1463, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Arman\Documents\flask_shop_vscode\venv\Lib\site-packages\flask\app.py", line 872, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Arman\Documents\flask_shop_vscode\venv\Lib\site-packages\flask\app.py", line 870, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Arman\Documents\flask_shop_vscode\venv\Lib\site-packages\flask\app.py", line 855, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Arman\Documents\flask_shop_vscode\venv\Lib\site-packages\flask_login\utils.py", line 290, in decorated_view
+    return current_app.ensure_sync(func)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Arman\Documents\flask_shop_vscode\source\auth\admin\utils.py", line 15, in decorated_view
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Arman\Documents\flask_shop_vscode\source\auth\admin\routes.py", line 47, in users_list_admin
+    return render_template('auth/admin/users_list_admin.html', users=users)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Arman\Documents\flask_shop_vscode\venv\Lib\site-packages\flask\templating.py", line 150, in render_template
+    return _render(app, template, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Arman\Documents\flask_shop_vscode\venv\Lib\site-packages\flask\templating.py", line 131, in _render
+    rv = template.render(context)
+         ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Arman\Documents\flask_shop_vscode\venv\Lib\site-packages\jinja2\environment.py", line 1301, in render
+    self.environment.handle_exception()
+  File "C:\Users\Arman\Documents\flask_shop_vscode\venv\Lib\site-packages\jinja2\environment.py", line 936, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "C:\Users\Arman\Documents\flask_shop_vscode\source\templates\auth\admin\users_list_admin.html", line 1, in top-level template code
+    {% extends "base.html" %}
+  File "C:\Users\Arman\Documents\flask_shop_vscode\source\templates\base.html", line 82, in top-level template code
+    {% block content %}
+  File "C:\Users\Arman\Documents\flask_shop_vscode\source\templates\auth\admin\users_list_admin.html", line 30, in block 'content'
+    <!-- <td>{{ user.verified_on|to_persian }}</td> -->
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Arman\Documents\flask_shop_vscode\source\auth\utils.py", line 11, in to_persian
+    return persian.from_gregorian(int(dt.strftime("%Y")), int(dt.strftime("%m")), int(dt.strftime("%d")))
+                                      ^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'strftime'
+2024-04-08 14:41:38,448 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:75]
+2024-04-08 14:43:41,674 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:75]

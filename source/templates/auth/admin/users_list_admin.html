@@ -15,6 +15,7 @@
                 <th scope="col">آدرس ایمیل</th>
                 <th scope="col">دسترسی ادمین</th>
                 <th scope="col">ایمیل تایید شده؟</th>
+                <th scope="col">تاریخ تایید</th>
                 <th scope="col">شناسه پایگاه داده</th>
             </tr>
         </thead>
@@ -26,7 +27,18 @@
                 <td>{{ user.email }}</td>
                 <td>{{ user.admin }}</td>
                 <td>{{ user.is_verified }}</td>
+                {% if user.verified_on %}
+                <td>{{ user.verified_on|to_persian }}</td>
+                {% else %}
+                <td>-</td>
+                {% endif %}
                 <td>{{ user.id }}</td>
+                <td><a href="{{ url_for('auth.admin.user_update_admin', id=user.id) }}">ویرایش</a></td>
+                <td>
+                    <form action="{{ url_for('auth.admin.user_delete_admin', id=user.id) }}" method="post" onclick="return confirm('آیا از حذف این کاربر اطمینان دارید؟')">
+                        <input type="submit" value="حذف">
+                    </form>
+                </td>
             </tr>
             {% endfor %}
         </tbody>
