@@ -2113,3 +2113,84 @@ Traceback (most recent call last):
 AttributeError: 'NoneType' object has no attribute 'strftime'
 2024-04-08 14:41:38,448 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:75]
 2024-04-08 14:43:41,674 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:75]
+2024-04-08 14:48:15,346 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:75]
+2024-04-08 14:48:42,579 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:75]
+2024-04-08 16:50:38,626 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:75]
+2024-04-08 16:52:17,150 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:75]
+2024-04-08 16:53:50,435 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:75]
+2024-04-08 16:54:22,416 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:75]
+2024-04-08 17:02:35,349 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:85]
+2024-04-08 17:02:37,987 ERROR: Exception on /admin/helloview/ [GET] [in C:\Users\Arman\Documents\flask_shop_vscode\venv\Lib\site-packages\flask\app.py:828]
+Traceback (most recent call last):
+  File "C:\Users\Arman\Documents\flask_shop_vscode\venv\Lib\site-packages\flask\app.py", line 1463, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Arman\Documents\flask_shop_vscode\venv\Lib\site-packages\flask\app.py", line 872, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Arman\Documents\flask_shop_vscode\venv\Lib\site-packages\flask\app.py", line 870, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Arman\Documents\flask_shop_vscode\venv\Lib\site-packages\flask\app.py", line 855, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Arman\Documents\flask_shop_vscode\venv\Lib\site-packages\flask_admin\base.py", line 69, in inner
+    return self._run_view(f, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Arman\Documents\flask_shop_vscode\venv\Lib\site-packages\flask_admin\base.py", line 369, in _run_view
+    return fn(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py", line 52, in index
+    return self.render('some-template.html')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Arman\Documents\flask_shop_vscode\venv\Lib\site-packages\flask_admin\base.py", line 308, in render
+    return render_template(template, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Arman\Documents\flask_shop_vscode\venv\Lib\site-packages\flask\templating.py", line 149, in render_template
+    template = app.jinja_env.get_or_select_template(template_name_or_list)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Arman\Documents\flask_shop_vscode\venv\Lib\site-packages\jinja2\environment.py", line 1081, in get_or_select_template
+    return self.get_template(template_name_or_list, parent, globals)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Arman\Documents\flask_shop_vscode\venv\Lib\site-packages\jinja2\environment.py", line 1010, in get_template
+    return self._load_template(name, globals)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Arman\Documents\flask_shop_vscode\venv\Lib\site-packages\jinja2\environment.py", line 969, in _load_template
+    template = self.loader.load(self, name, self.make_globals(globals))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Arman\Documents\flask_shop_vscode\venv\Lib\site-packages\jinja2\loaders.py", line 125, in load
+    source, filename, uptodate = self.get_source(environment, name)
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Arman\Documents\flask_shop_vscode\venv\Lib\site-packages\flask\templating.py", line 65, in get_source
+    return self._get_source_fast(environment, template)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Arman\Documents\flask_shop_vscode\venv\Lib\site-packages\flask\templating.py", line 99, in _get_source_fast
+    raise TemplateNotFound(template)
+jinja2.exceptions.TemplateNotFound: some-template.html
+2024-04-08 17:02:58,532 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:85]
+2024-04-08 17:03:21,488 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:85]
+2024-04-08 17:10:19,088 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:75]
+2024-04-08 17:11:15,029 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:75]
+2024-04-08 17:16:06,047 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:78]
+2024-04-08 17:19:20,939 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:79]
+2024-04-08 17:21:23,649 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:79]
+2024-04-08 17:23:27,597 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:79]
+2024-04-08 17:25:40,989 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:79]
+2024-04-08 17:25:55,628 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:79]
+2024-04-08 17:29:16,315 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:79]
+2024-04-08 17:31:47,872 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:82]
+2024-04-08 17:47:34,627 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:82]
+2024-04-08 18:05:28,049 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:82]
+2024-04-08 18:14:52,789 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:82]
+2024-04-08 18:15:33,368 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:82]
+2024-04-08 19:00:44,572 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:81]
+2024-04-08 19:02:21,646 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:81]
+2024-04-08 19:04:39,609 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:81]
+2024-04-08 19:05:13,099 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:81]
+2024-04-08 19:06:13,295 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:81]
+2024-04-08 19:12:56,198 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:81]
+2024-04-08 19:13:12,771 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:81]
+2024-04-08 19:15:38,077 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:81]
+2024-04-08 19:26:22,982 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:81]
+2024-04-08 20:44:07,416 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:81]
+2024-04-08 20:47:06,887 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:81]

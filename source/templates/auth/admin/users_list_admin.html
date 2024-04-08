@@ -59,6 +59,8 @@
         <a href="{{ url_for('auth.admin.users_list_admin', page=users.next_num) }}">{{ 'بعد' }}</a>
         {% endif %}
     </div>
+    <br>
+    <h6>شناسه شما: {{ current_user.id }}</h6>
 </div>
 
 <p style="padding-right: 50px; padding-top: 50px;">

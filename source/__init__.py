@@ -1,5 +1,6 @@
 from flask import Flask
 from config import Config
+from source.admin import AdminIndexView, HelloView, UserAdminView
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_simple_captcha import CAPTCHA
@@ -15,7 +16,7 @@ migrate = Migrate()
 Captcha = CAPTCHA(config=CaptchaConfig)
 login_manager = LoginManager()
 mail = Mail()
-admin = Admin(name='Admin Panel')
+admin = Admin(index_view=AdminIndexView())
 
 def create_app(config_class=Config):
     app = Flask(__name__)
@@ -29,6 +30,11 @@ def create_app(config_class=Config):
     login_manager.login_message = "برای دسترسی به این صفحه باید وارد سایت شوید."
     mail.init_app(app)
     admin.init_app(app)
+
+    # admin views
+    from source.models.user import User
+    admin.add_view(HelloView(name='Hello'))
+    admin.add_view(UserAdminView(User, db.session))
 
     # test route removed by adding main blueprint
     from source.main import bp as main_bp

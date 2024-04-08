@@ -52,4 +52,24 @@ Maybe if i changed the my own admin template folder name... Did not work. Now fl
 This doesn't work. even tried to changed the name. changed everything.
 
 This is no longer practical. I will move my own admin panel to auth as a child blueprint.
-and add a admin.py file for flask-admin.
+and add a admin.py file for flask-admin. (done)
+
+no more able to follow flaskcookbook. it needs to be read sequentially.
+
+feature to implement:
+ckeditor in user model (for not field)
+
+first use wtforms, to customize textareafield
+then customize flask-admin to use this (overriding)
+
+but before that, i will revert flask-admin to basic model view, and try to implement this feature on my own admin panel.
+there is also flask-ckeditor extension
+so basically there are three wasy:
+1. using flask-cookbook methods, to (wtforms custom ckeditor and flask-admin)
+2. flask-ckeditor extension
+3. customizing wtform field with ckeditor widget and then just rendering it.
+
+IMPORTANT: flask-admin on its own is useless. Since user model does not store plain text passwords, flask-admin,
+user creation form needs to be heavily modified to work. Therefore i will just keep it here without anymore modification,
+and read the docs, and then edit it later.
+For now i'll just try to implement ckeditor on my own admin panel.
