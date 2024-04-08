@@ -2194,3 +2194,4 @@ jinja2.exceptions.TemplateNotFound: some-template.html
 2024-04-08 19:26:22,982 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:81]
 2024-04-08 20:44:07,416 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:81]
 2024-04-08 20:47:06,887 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:81]
+2024-04-08 20:57:22,204 INFO: Flask_app startup [in C:\Users\Arman\Documents\flask_shop_vscode\source\__init__.py:81]

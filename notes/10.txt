@@ -1,0 +1,3 @@
+We'll start by customizing the textareafield widget from wtforms. Also reading the docs seems like a good idea.
+
+Also, i'm going to add if form.errors to login and register.

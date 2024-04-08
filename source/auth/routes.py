@@ -72,6 +72,10 @@ def register():
             else:
                 flash("کد امنیتی اشتباه وارد شده است.", 'error')
                 return redirect(url_for('auth.register'))
+        if form.errors:
+            ic(form.errors)
+            flash("خطا در فرم.", 'danger')
+            return redirect(url_for('auth.register'))
         return render_template('auth/register.html', form=form, captcha=new_captcha_dict)
 
 
@@ -111,6 +115,10 @@ def login():
             else:
                 flash("کد امنیتی اشتباه وارد شده است.", 'error')
                 return redirect(url_for('auth.login'))
+        if form.errors:
+            ic(form.errors)
+            flash("خطا در فرم.", 'danger')
+            return redirect(url_for('auth.login'))
         return render_template('auth/login.html', form=form, captcha=new_captcha_dict)
 
 @bp.route('/profile', methods=['GET', 'POST'])
