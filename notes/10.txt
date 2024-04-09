@@ -16,3 +16,10 @@ Now all that is left is to successfully load the ckeditor using pyton code and n
 
 I give up. I can't do this now. I'm going to use flask-ckeditor and then do more study on this later.
 the notes field on user works fine.
+
+Ok, after hours of struggle, i was finally able to use flask-ckeditor. 
+very important note: must download version ckeditor version 4 and standard version.
+I don't know why yet, but version 5 or any lts version will not work.
+
+Time to implement one the main functionalities, either the blog or shop. let's go with shop.
+nevermind that, the site looks terrible, i'll try to add flask-bootstrap.

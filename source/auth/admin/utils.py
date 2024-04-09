@@ -44,13 +44,22 @@ def insert_user_admin(username: str, email: str, password: str, admin: bool = Fa
 
 def insert_user_admin_with_note(username, email, password, admin, notes):
     try:
-        user = User(username, email)
-        user.set_password(password)
-        user.admin = admin
-        user.notes = notes
-        db.session.add(user)
-        db.session.commit()
+        try:
+            user = User(username, email)
+            user.set_password(password)
+            user.admin = admin
+            user.notes = notes
+        except Exception as model_query_error:
+            return {'result': False, 'message': model_query_error}
+        try:
+            db.session.add(user)
+            db.session.commit()
+        except Exception as db_error:
+            db.session.rollback()
+            return {'result': False, 'message': db_error}
+
         return {'result': True, 'message': None}
+    
     except Exception as error:
         db.session.rollback()
         return {'result': False, 'message': error}
