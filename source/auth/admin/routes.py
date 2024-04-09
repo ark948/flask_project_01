@@ -91,7 +91,7 @@ def user_create_ck():
         email = form.email.data
         password = form.pwdhash.data
         admin = form.admin.data
-        notes = form.notes.data
+        notes = form.content.data
         existing_username = User.query.filter_by(username=username).first()
         if existing_username:
             flash("نام کاربری قبلا ثبت شده است.", 'danger') # to be changed to warning later

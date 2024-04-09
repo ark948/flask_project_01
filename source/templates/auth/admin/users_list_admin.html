@@ -34,7 +34,7 @@
                     <td>-</td>
                 {% endif %}
                 {% if user.notes %}
-                    <td>{{ user.notes }}</td>
+                    <td>{{ user.notes|safe }}</td>
                     {% else %}
                     <td>-</td>
                 {% endif %}
