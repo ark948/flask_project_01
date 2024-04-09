@@ -41,3 +41,16 @@ def insert_user_admin(username: str, email: str, password: str, admin: bool = Fa
         })
     
     return response
+
+def insert_user_admin_with_note(username, email, password, admin, notes):
+    try:
+        user = User(username, email)
+        user.set_password(password)
+        user.admin = admin
+        user.notes = notes
+        db.session.add(user)
+        db.session.commit()
+        return {'result': True, 'message': None}
+    except Exception as error:
+        db.session.rollback()
+        return {'result': False, 'message': error}

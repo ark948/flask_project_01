@@ -1,3 +1,18 @@
 We'll start by customizing the textareafield widget from wtforms. Also reading the docs seems like a good idea.
 
 Also, i'm going to add if form.errors to login and register.
+
+Note: while reading wtforms, found out that custom filters can also be added to fields (to_persian)
+
+i was looking at the wrong section in wtforms doc (custom fields).
+i should have been looking at custom widgets
+
+Before that, i will try to render ckeditor without python, just with html forms.
+for some reason the ckeditor nor the bootstrap file can be found.
+I successfully narrowed down the cause of the problem. The location of the ckeditor js file is problematic. it cannot be found
+because the online one works fine.
+Fixed the problem by adding static url path to app.
+Now all that is left is to successfully load the ckeditor using pyton code and not the html.
+
+I give up. I can't do this now. I'm going to use flask-ckeditor and then do more study on this later.
+the notes field on user works fine.

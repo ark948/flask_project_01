@@ -1,9 +1,10 @@
 from source import db
-
 from source.auth.admin import bp
+from icecream import ic
+ic.configureOutput(includeContext=True)
 
 from flask_login import (
-    login_required, current_user
+    login_required
 )
 
 from source.models.user import (
@@ -15,15 +16,12 @@ from flask import (
 )
 
 from source.auth.admin.forms import (
-    AdminUserCreateForm, AdminUserUpdateForm
+    AdminUserCreateForm, AdminUserUpdateForm, AdminUserCreateCKForm
 )
 
 from source.auth.admin.utils import (
-    admin_login_required, insert_user_admin
+    admin_login_required, insert_user_admin, insert_user_admin_with_note
 )
-
-from icecream import ic
-ic.configureOutput(includeContext=True)
 
 @bp.route('/')
 @login_required
@@ -78,9 +76,45 @@ def user_create_admin():
     if form.errors:
         ic(form.errors)
         flash("خطا در فرم", 'danger')
-        return redirect(url_for('auth.admin.user_create_admin.'))
+        return redirect(url_for('auth.admin.user_create_admin'))
         # flash(form.errors, 'danger')
     return render_template('auth/admin/user_create_admin.html', form=form)
+
+@bp.route('/create-user-ck', methods=['GET', 'POST'])
+@login_required
+@admin_login_required
+def user_create_ck():
+    form = AdminUserCreateCKForm()
+
+    if form.validate_on_submit():
+        username = form.username.data
+        email = form.email.data
+        password = form.pwdhash.data
+        admin = form.admin.data
+        notes = form.notes.data
+        existing_username = User.query.filter_by(username=username).first()
+        if existing_username:
+            flash("نام کاربری قبلا ثبت شده است.", 'danger') # to be changed to warning later
+            return redirect(url_for('auth.admin.user_create_ck'))
+        try:
+            response = insert_user_admin_with_note(username, email, password, admin, notes)
+            if response['result'] == True:
+                flash('کاربر با موفقیت افزورده شد.', 'success')
+                return redirect(url_for('auth.admin.users_list_admin'))
+            else:
+                flash("خطا در فرایند افزودن.", 'danger')
+                ic(response['message'])
+                return redirect(url_for('auth.admin.user_create_ck'))
+        except Exception as new_user_admin_error:
+            ic(new_user_admin_error)
+            flash("خطا در فرایند افزودن کاربر جدید.", 'danger')
+            return redirect(url_for('auth.admin.user_create_ck'))
+    
+    if form.errors:
+        ic(form.errors)
+        flash("خطا در فرم", 'danger')
+        return redirect(url_for('auth.admin.users_list_admin'))
+    return render_template('auth/admin/user_create_admin_ck.html', form=form)
 
 @bp.route('/update-user/<id>', methods=['GET', 'POST'])
 @login_required

@@ -8,6 +8,7 @@ from config import CaptchaConfig
 from flask_login import LoginManager
 from flask_mail import Mail
 from flask_admin import Admin
+from flask_ckeditor import CKEditor
 from logging.handlers import SMTPHandler, RotatingFileHandler
 import logging, os
 
@@ -17,10 +18,12 @@ Captcha = CAPTCHA(config=CaptchaConfig)
 login_manager = LoginManager()
 mail = Mail()
 admin = Admin(index_view=AdminIndexView())
+ckeditor = CKEditor()
 
 def create_app(config_class=Config):
-    app = Flask(__name__)
+    app = Flask(__name__, static_url_path='/static')
     app.config.from_object(config_class)
+    app.config['CKEDITOR_SERVE_LOCAL'] = True
 
     db.init_app(app)
     migrate.init_app(app, db)
@@ -30,6 +33,7 @@ def create_app(config_class=Config):
     login_manager.login_message = "برای دسترسی به این صفحه باید وارد سایت شوید."
     mail.init_app(app)
     admin.init_app(app)
+    ckeditor.init_app(app)
 
     # admin views
     from source.models.user import User

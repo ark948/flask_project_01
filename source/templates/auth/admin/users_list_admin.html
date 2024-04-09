@@ -16,6 +16,7 @@
                 <th scope="col">دسترسی ادمین</th>
                 <th scope="col">ایمیل تایید شده؟</th>
                 <th scope="col">تاریخ تایید</th>
+                <th scope="col">یادداشت</th>
                 <th scope="col">شناسه پایگاه داده</th>
             </tr>
         </thead>
@@ -28,9 +29,14 @@
                 <td>{{ user.admin }}</td>
                 <td>{{ user.is_verified }}</td>
                 {% if user.verified_on %}
-                <td>{{ user.verified_on|to_persian }}</td>
-                {% else %}
-                <td>-</td>
+                    <td>{{ user.verified_on|to_persian }}</td>
+                    {% else %}
+                    <td>-</td>
+                {% endif %}
+                {% if user.notes %}
+                    <td>{{ user.notes }}</td>
+                    {% else %}
+                    <td>-</td>
                 {% endif %}
                 <td>{{ user.id }}</td>
                 <td><a href="{{ url_for('auth.admin.user_update_admin', id=user.id) }}">ویرایش</a></td>
