@@ -39,6 +39,7 @@ def get_engine_url():
 config.set_main_option('sqlalchemy.url', get_engine_url())
 target_db = current_app.extensions['migrate'].db
 from source.models.user import User
+from source.models.ticket import Ticket, Ticket_Status, Ticket_Category
 
 # other values from the config, defined by the needs of env.py,
 # can be acquired:

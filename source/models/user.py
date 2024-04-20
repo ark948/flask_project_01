@@ -18,6 +18,7 @@ class User(UserMixin, db.Model):
     verified_on = db.Column(db.DateTime, nullable=True)
     admin = db.Column(db.Boolean(), default=False)
     notes = db.Column(db.UnicodeText, nullable=True)
+    avatar = db.Column(db.String(256), nullable=True)
 
     def __init__(self, username, email):
         self.username = username

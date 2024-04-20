@@ -1,9 +1,26 @@
 {% extends "base.html" %}
 
 {% block content %}
+{% from "macros/_formhelpers.html" import render_field %}
 
 <div style="padding-right: 50px; padding-top: 50px;">
     <h5>پروفایل کاربری {{ current_user.username }}</h5>
+    {% if current_user.avatar %}
+        <img src="{{ url_for('auth.get_avatar', filename=current_user.avatar) }}" width="50">
+        <br>
+        <form action="{{ url_for('auth.remove_avatar') }}" method="post" onclick="return confirm('آیا از حذف تصویر پروفایل کاربری خود اطمینان داردید؟')">
+            <input type="submit" value="حذف تصویر">
+        </form>
+    {% else %}
+        <img src="{{ url_for('auth.get_avatar', filename='default.png') }}" width="50">
+    {% endif %}
+    <form action="{{ url_for('auth.update_avatar') }}" method="post" enctype="multipart/form-data">
+        {{ form.csrf_token }}
+        <label for="file">فایل:</label>
+        <input name="file" type="file">
+        {{ form.submit.label }}
+        {{ form.submit() }}
+    </form>
     <h5>آدرس ایمیل: {{ current_user.email }}</h5>
     {% if current_user.phone_number %}
         <h5>شماره تماس: {{ current_user.phone_number }}</h5>
@@ -20,20 +37,16 @@
         </h5>
         {% endif %}
     </h5>
-
     <br>
-
-    {% from "macros/_formhelpers.html" import render_field %}
 
     ویرایش مشخصات:
     <form action="{{ url_for('auth.edit_profile') }}" method="post">
         {{ form1.csrf_token }}
-        {{ render_field(form1.username )}}
-        {{ render_field(form1.email )}} <h6 style="display: inline;">تغییر ایمیل نیاز به تایید مجدد دارد.</h6>
+        {{ render_field(form1.username) }}
+        {{ render_field(form1.email) }} <h6 style="display: inline;">تغییر ایمیل نیاز به تایید مجدد دارد.</h6>
         {{ render_field(form1.phone_number) }}
         {{ render_field(form1.submit) }}
     </form>
-
     <br>
 
     تغییر رمز عبور:

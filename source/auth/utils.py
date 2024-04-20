@@ -1,3 +1,4 @@
+from flask import send_from_directory, current_app
 from source.auth import bp
 from source.models.user import User
 from source import db
@@ -39,3 +40,20 @@ def check_username_availability(username):
         return False
     else:
         return True
+    
+@bp.route('/uploads/avatars/<filename>')
+def get_avatar(filename):
+    return send_from_directory(current_app.config['AVATARS_FOLDER'], filename)
+
+def allowed_file(filename):
+    allowed_extensions = current_app.config['ALLOWED_EXTENSIONS']
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in allowed_extensions
+
+def update_user_avatar(user, filename):
+    try:
+        user.avatar = filename
+        db.session.commit()
+        return True
+    except Exception as error:
+        print(error)
+        return False

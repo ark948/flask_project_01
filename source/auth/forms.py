@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, EmailField, PasswordField, SubmitField, BooleanField, TelField
+from wtforms import StringField, EmailField, PasswordField, SubmitField, BooleanField, TelField, FileField
 from wtforms.validators import DataRequired, EqualTo
 
 class RegisterForm(FlaskForm):
@@ -41,3 +41,6 @@ class ChangePasswordForm(FlaskForm):
     password = PasswordField('رمزعبور جدید', validators=[DataRequired()])
     confirm = PasswordField('تکرار رمزعبور جدید', validators=[DataRequired(), EqualTo('password')])
     submit = SubmitField('ثبت')
+
+class AvatarForm(FlaskForm):
+    submit = SubmitField('بروزرسانی')

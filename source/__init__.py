@@ -21,7 +21,7 @@ admin = Admin(index_view=AdminIndexView())
 ckeditor = CKEditor()
 
 def create_app(config_class=Config):
-    app = Flask(__name__, static_url_path='/static')
+    app = Flask(__name__)
     app.config.from_object(config_class)
     app.config['CKEDITOR_SERVE_LOCAL'] = True
 
@@ -34,6 +34,13 @@ def create_app(config_class=Config):
     mail.init_app(app)
     admin.init_app(app)
     ckeditor.init_app(app)
+
+    #cli
+    from source.cli import bp as cli_bp
+    app.register_blueprint(cli_bp)
+
+    from source.users_cli import bp as users_cli
+    app.register_blueprint(users_cli)
 
     # admin views
     from source.models.user import User

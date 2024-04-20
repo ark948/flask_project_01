@@ -3,7 +3,8 @@ from dotenv import load_dotenv
 
 # load .env file later
 basedir = os.path.abspath(os.path.dirname(__file__))
-load_dotenv(os.path.join(basedir, '.env'))
+instance_path = os.path.join(basedir, 'instance')
+load_dotenv(os.path.join(instance_path, '.env'))
 
 class Config:
     TESTING = False
@@ -11,6 +12,9 @@ class Config:
     SQLALCHEMY_DATABASE_URI = "postgresql+psycopg2://postgres:1234@localhost:5432/flask_db"
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     PAGINATION_PER_PAGE_ADMIN = 10
+    UPLOAD_FOLDER = os.path.join(basedir, 'uploads')
+    AVATARS_FOLDER = os.path.join(UPLOAD_FOLDER, 'avatars')
+    ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
 
     # Email server
     MAIL_SERVER = 'localhost'

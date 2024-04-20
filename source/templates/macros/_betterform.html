@@ -1,0 +1,22 @@
+{% macro render_field_better(field) %}
+
+<div class="mb-3" style="width: 25%; padding-right: 50px;">
+    {{ field.label(class="form-label", **kwargs )}}
+    {% if field.class == "form-control" %}
+        {{ field(class="form-control", **kwargs)|safe }}
+    {% elif field.class == "form-check-control" %}
+        {{ field(**kwargs) }}
+    {% else %}
+        {{ field(**kwargs) }}
+    {% endif %}
+
+    {% if field.errors %}
+        {% for error in field.errors %}
+            <div class="invalid-feedback">
+            {{ error }}
+            </div>
+        {% endfor %}
+    {% endif %}
+</div>
+
+{% endmacro %}

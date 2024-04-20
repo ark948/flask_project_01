@@ -6,12 +6,13 @@
 <h3>برای ورود به سایت از فرم زیر استفاده کنید.</h3>
 
 {% from "macros/_formhelpers.html" import render_field %}
+{% from "macros/_betterform.html" import render_field_better %}
+{% from "macros/_sampleform.html" import form_field %}
 <form class="mb-3" action="{{ url_for('auth.login') }}" method="post">
         {{ form.csrf_token }}
-        {{ render_field(form.username) }}
-        {{ render_field(form.password) }}
-        {{ form.remember_me.label }}
-        {{ form.remember_me() }}
+        {{ render_field(form.username, class="form-check") }}
+        {{ render_field(form.password, class="form-check") }}
+        {{ render_field(form.remember_me, class="form-check-control") }}
         {% if captcha %}
         {{ captcha_html(captcha)|safe }}
         {% endif %}

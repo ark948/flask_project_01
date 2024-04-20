@@ -3,11 +3,13 @@ from flask import (
 )
 
 from source.auth import bp
+
 from source.auth.forms import (
-    RegisterForm, LoginForm, ResetPasswordRequestForm, ResetPasswordForm, EmailVerificationRequestForm, ProfileEditForm, ChangePasswordForm
+    RegisterForm, LoginForm, ResetPasswordRequestForm, ResetPasswordForm, EmailVerificationRequestForm, ProfileEditForm, ChangePasswordForm, AvatarForm
 )
 
 from source import db, Captcha
+
 from flask_login import (
     login_user, logout_user, current_user, login_required
 )
@@ -21,7 +23,7 @@ from source.email import (
 )
 
 from source.auth.utils import (
-    insert_user_object
+    insert_user_object, allowed_file, update_user_avatar
 )
 
 from source.models.user import User
@@ -30,6 +32,9 @@ from icecream import ic
 ic.configureOutput(includeContext=True)
 
 import datetime
+import uuid
+import os
+from werkzeug.utils import secure_filename
 
 # jinja custom filter
 # from source.auth.utils import to_persian
@@ -131,7 +136,49 @@ def profile():
     )
     
     password_form = ChangePasswordForm()
-    return render_template('auth/profile.html', form1=profile_form, form2=password_form)
+    avatar_form = AvatarForm()
+    return render_template('auth/profile.html', form1=profile_form, form2=password_form, form=avatar_form)
+
+@bp.route('/update-avatar', methods=['POST'])
+@login_required
+def update_avatar():
+    try:
+        if 'file' not in request.files:
+            flash("خطایی رخ داده است. [1]", 'error')
+            return redirect(url_for('auth.profile'))
+        file = request.files['file']
+    except Exception as error:
+        ic(error)
+        flash("خطایی رخ داده است. [2]", 'error')
+        return redirect(url_for('auth.profile'))
+    try:
+        if file and allowed_file(file.filename):
+            filename = secure_filename(file.filename)
+            unique_filename = str(uuid.uuid1()) + "_" + filename
+            file.save(os.path.join(current_app.config['AVATARS_FOLDER'], unique_filename))
+    except Exception as error:
+        ic(error)
+        flash("خطایی رخ داده است. [3]", 'error')
+        return redirect(url_for('auth.profile'))
+    try:
+        update_user_avatar(current_user, unique_filename)
+        flash("تصویر پروفایل با موفثیت بروزرسانی شد.", 'success')
+        return redirect(url_for('auth.profile'))
+    except Exception as error:
+        ic(error)
+        flash("file error [4]")
+        return redirect(url_for('auth.profile'))
+    
+@bp.route('/remove-avatar', methods=['POST'])
+@login_required
+def remove_avatar():
+    try:
+        update_user_avatar(current_user, 'default.png')
+        flash("تصویر کاربری شما با موفقیت حذف شد.", 'success')
+    except Exception as error:
+        print(error)
+        flash("خطایی رخ داده است.", 'error')
+    return redirect(url_for('auth.profile'))
 
 @bp.route('/edit-profile', methods=['POST'])
 @login_required

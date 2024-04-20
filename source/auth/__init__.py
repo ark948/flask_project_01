@@ -5,3 +5,4 @@ bp = Blueprint('auth', __name__)
 bp.register_blueprint(admin_bp, url_prefix='admin')
 
 from source.auth import routes
+from source.auth.utils import *
